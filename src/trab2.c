@@ -1,5 +1,10 @@
 #include "trab2.h"
 
+struct _solucao_t {
+    size_t pos_A;
+    size_t pos_B;
+    struct _solucao_t *proximo;
+};
 
 static double s_min(double list[]){
     double *p=list;
@@ -14,10 +19,20 @@ static double s_min(double list[]){
 
 #define min(...) s_min((double []){__VA_ARGS__,NAN})
 
-double
-alinhamento_quadratico_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, const penalidade_fn penalidade){
+double 
+alinhamento_quadratico_custo(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, const penalidade_fn penalidade){
 
     double M[m+1][n+1];
+
+    double val = alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
+
+    return val;
+}
+
+double 
+alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, const penalidade_fn penalidade,
+				    double M[m+1][n+1]){
+
     
     for (int i=0; i<=m;i++){
 	M[i][0]= i*gap;
@@ -65,4 +80,65 @@ alinhamento_linear_custo(char *origem, size_t m, char*destino, size_t n, double 
     
     
     return corrente[m];
+}
+
+solucao_t *
+procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, const penalidade_fn penalidade){
+    double M[m+1][n+1];
+
+    alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
+
+    size_t i= m;  size_t j= n;
+
+    solucao_t *solucao=NULL;
+
+    while (i && j) {
+	if (M[i][j] == penalidade(origem[i-1],destino[j-1]) + M[i-1][j-1]) {
+	    solucao = solucao_new(--i,--j,solucao);
+	} else if (M[i][j] == gap + M[i-1][j]) {
+	    i--;
+	} else if (M[i][j] == gap + M[i][j-1]) {
+	    j--;
+	} else {
+	    /*  Erro!!!! */
+	    solucao_destroy(&solucao);
+	    return NULL;
+	}
+    }
+    return solucao;
+
+}
+
+solucao_t *
+solucao_new(size_t i, size_t j, solucao_t *sol) {
+    solucao_t *self = malloc (sizeof(struct _solucao_t));
+    if (!self) return NULL;
+    
+    self->pos_A=i; self->pos_B=j;
+    self->proximo = sol;
+
+    return self;
+};
+
+void
+solucao_destroy (solucao_t **self_p) {
+    if (!*self_p) return;
+    solucao_t *self = *self_p;
+    while (self) {
+	solucao_t *p = self->proximo;
+	free(self);
+	self=p;
+    }
+    *self_p=NULL;
+}
+
+void
+solucao_print(solucao_t *self) {
+    solucao_t *p=self;
+    while (p) {
+	printf("(%zu,%zu) ",p->pos_A, p->pos_B);
+	p=p->proximo;
+    }
+    
+    printf("\n");
 }
