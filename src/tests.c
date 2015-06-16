@@ -30,7 +30,7 @@ main(void){
 
     int test=0;
     
-    printf ("testes unitários -- custo quadratico\n");
+    printf ("\ntestes unitários -- custo quadratico\n");
 
     _TEST(alinhamento_quadratico_custo, test,"","",gap,delta,0.0,err);
     _TEST(alinhamento_quadratico_custo, test,"A","A",gap,delta,0.0,err);
@@ -55,5 +55,56 @@ main(void){
     _TEST(alinhamento_linear_custo, test,"AA","BA",gap,delta,1.0,err);
     _TEST(alinhamento_linear_custo, test,"AB","BA",gap,delta,1.4,err);
     _TEST(alinhamento_linear_custo, test,"AB","CD",gap,delta,2.0,err);
+
+    printf ("\ntestes unitários -- classe de solucão\n");
+
+    printf ("new(0,0,NULL): ");
+    solucao_t *t = solucao_new(0,0,NULL);
+    if (!t) {
+	printf ("nok\n");
+	return ++test;
+    }
     
+    printf("ok\n");
+    
+    printf ("destroy: ");
+    solucao_destroy(&t);
+    if (t) {
+	printf ("nok\n");
+	return ++test;
+    }
+    printf("ok\n");
+
+    printf ("new(0,0,NULL): ");
+    t = solucao_new(0,0,NULL);
+    if (!t) {
+	printf ("nok\n");
+	return ++test;
+    }
+    printf("ok\n");
+        printf ("new(1,1,t): ");
+    t = solucao_new(1,1,t);
+    if (!t) {
+	printf ("nok\n");
+	return ++test;
+    }
+    printf("ok\n");
+
+    solucao_print(t);
+    solucao_destroy(&t);
+
+    printf ("\ntestes de uso\n");
+
+    t= procurar_solucao_quadratico("ABCD",4,"ABCD",4,gap,delta);
+    solucao_print(t);
+    solucao_destroy(&t);
+
+    t= procurar_solucao_quadratico("ABCD",4,"BCD",3,gap,delta);
+    solucao_print(t);
+    solucao_destroy(&t);
+
+    t= procurar_solucao_quadratico("AAAA",4,"ABCD",4,gap,delta);
+    solucao_print(t);
+    solucao_destroy(&t);
+
 };
