@@ -6,11 +6,14 @@ struct _solucao_t {
     struct _solucao_t *proximo;
 };
 
-static double s_min(double list[]){
+static double
+s_min(double list[]){
     double *p=list;
-    double min=*p;
+    
+    double min= *p;
+    
     while (!isnan(*p)){
-	if (min > *p)
+	if ((min > *p) )
 	    min = *p;
 	p++;
     }
@@ -20,7 +23,7 @@ static double s_min(double list[]){
 #define min(...) s_min((double []){__VA_ARGS__,NAN})
 
 double 
-alinhamento_quadratico_custo(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, const penalidade_fn penalidade){
+alinhamento_quadratico_custo(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
 
     double M[m+1][n+1];
 
@@ -30,7 +33,7 @@ alinhamento_quadratico_custo(const char *origem, const size_t m, const char* des
 }
 
 double 
-alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, const penalidade_fn penalidade,
+alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade,
 				    double M[m+1][n+1]){
 
     
@@ -55,7 +58,7 @@ alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const ch
 
 
 double
-alinhamento_linear_custo(char *origem, size_t m, char*destino, size_t n, double gap, penalidade_fn penalidade){
+alinhamento_linear_custo(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
     double corrente[m];
     double ultimo[m];
 
@@ -69,8 +72,10 @@ alinhamento_linear_custo(char *origem, size_t m, char*destino, size_t n, double 
 	
 	corrente[0] = j*gap;
 
-	for (int i=0; i<=m; i++){
-	    double val1=penalidade(origem[i-1],destino[j-1]) + ultimo[i-1];
+	for (int i=1; i<=m; i++){
+	    double val1=
+		penalidade(origem[i-1],destino[j-1])
+		+ ultimo[i-1];
 	    double val2=gap + corrente[i-1];
 	    double val3=gap + ultimo[i];
 
@@ -83,7 +88,7 @@ alinhamento_linear_custo(char *origem, size_t m, char*destino, size_t n, double 
 }
 
 solucao_t *
-procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, const penalidade_fn penalidade){
+procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade){
     double M[m+1][n+1];
 
     alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
@@ -111,7 +116,7 @@ procurar_solucao_quadratico(const char *origem, const size_t m, const char*desti
 
 solucao_t *
 solucao_new(size_t i, size_t j, solucao_t *sol) {
-    solucao_t *self = malloc (sizeof(struct _solucao_t));
+    solucao_t *self = calloc (sizeof(struct _solucao_t),1);
     if (!self) return NULL;
     
     self->pos_A=i; self->pos_B=j;

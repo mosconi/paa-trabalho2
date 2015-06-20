@@ -1,6 +1,14 @@
 #ifndef __LIST_H__
 #define __LIST_H__
 
+#define _DEFAULT_SOURCE
+#define _GNU_SOURCE
+
+#include <assert.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef int (cmp_fn)(const void *k1,const void *k2);
 
 typedef struct _list_t list_t;
@@ -41,5 +49,7 @@ list_prev(list_t *list);
 void *
 list_find(list_t *list, const void *data, cmp_fn *cmp_fn);
 
+void
+list_selftest (void);
 
 #endif

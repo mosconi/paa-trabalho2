@@ -1,11 +1,12 @@
 P = trabalho2
 
 OBJS = src/trab2.o
-OBJS+= src/graph.o 
+OBJS+= src/graph.o
+OBJS+= src/list.o 
 
 
-CFLAGS = -Wall -g -std=c99 -Iinclude -O0 
-LDFLAGS = -Wall -g -std=c99
+CFLAGS = -Wall -g -std=c99 -Iinclude -O0  -Werror
+LDFLAGS = -Wall -g -std=c99 -Werror
 LDLIBS = -lm -lgcov  -L. -l${P}
 
 
