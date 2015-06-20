@@ -1,13 +1,6 @@
 #ifndef __GRAPH_H__
 #define __GRAPH_H__
 
-#define _DEFAULT_SOURCE
-#define _GNU_SOURCE
-
-#include <assert.h>
-#include <string.h>
-#include <stdlib.h>
-
 typedef struct _adjlist_t adjlist_t;
 
 typedef struct _graph_t graph_t;
@@ -46,5 +39,7 @@ graph_vcount(graph_t *graph);
 size_t
 graph_ecount(graph_t *graph);
 
+void
+graph_selftest(void);
 
 #endif

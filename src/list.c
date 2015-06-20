@@ -1,4 +1,4 @@
-#include "list.h"
+#include "trab2.h"
 
 
 typedef struct _item_t {
@@ -151,7 +151,7 @@ list_tail(list_t *list){
 }
 
 size_t
-list_size(list_t *list) {
+list_size(const list_t *list) {
     assert(list);
     return list->sz;
 }
@@ -198,6 +198,18 @@ static int
 _cmp(const void* k1,const void* k2){
     return strcmp((char *) k1, (char *) k2);
 }
+
+
+void *
+list_item (list_t *list) {
+    assert (list);
+    
+    if(!list->cursor)
+	return NULL;
+
+    return list->cursor->data;
+}
+    
 
 
 void *

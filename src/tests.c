@@ -108,5 +108,7 @@ main(void){
     solucao_destroy(&t);
 
     list_selftest();
+    set_selftest();
+    graph_selftest();
 
 };

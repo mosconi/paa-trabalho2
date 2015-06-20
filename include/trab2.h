@@ -1,6 +1,10 @@
 #ifndef __PAA_TRAB2_H__
 #define __PAA_TRAB2_H__
 
+//#define _DEFAULT_SOURCE
+#define _GNU_SOURCE
+
+#include <assert.h>
 #include <string.h>
 #include <float.h>
 #include <math.h>
@@ -8,7 +12,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#if (defined (_MSC_VER))
+#   if (!defined (__cplusplus) && (!defined (true)))
+#       define true 1
+#       define false 0
+        typedef char bool;
+#   endif
+#else
+#   include <stdbool.h>
+#endif
+
 #include "list.h"
+#include "set.h"
 #include "graph.h"
 
 typedef double (*penalidade_fn)(char, char);

@@ -2,7 +2,8 @@ P = trabalho2
 
 OBJS = src/trab2.o
 OBJS+= src/graph.o
-OBJS+= src/list.o 
+OBJS+= src/list.o
+OBJS+= src/set.o 	
 
 
 CFLAGS = -Wall -g -std=c99 -Iinclude -O0  -Werror
@@ -26,9 +27,6 @@ $(P)_ut: src/tests.o lib$(P).a
 
 clean:
 	rm -f *.o src/*.o
-	rm -f src/*.gcno
-	rm -f src/*.gcda
-	rm -f *.c.gcov
 	rm -f $(P) lib$(P).a $(P)_ut
 
 test: $(P)_ut

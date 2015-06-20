@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "trab2.h"
 
 struct _graph_t {
     size_t vcount;
@@ -146,4 +146,7 @@ graph_ecount(graph_t *graph){
     return graph->ecount;
 }
 
+void
+graph_selftest(void){
 
+}
