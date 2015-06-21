@@ -16,6 +16,8 @@
 #include <pthread.h>
 /* for ETIMEDOUT */
 #include <errno.h>
+#include <proc/readproc.h>
+#include <signal.h>
 
 #if (defined (_MSC_VER))
 #   if (!defined (__cplusplus) && (!defined (true)))
@@ -32,6 +34,8 @@
 #include "graph.h"
 
 #define streq(A,B) 0==strcmp(A,B)
+
+extern bool print_memory_usage;
 
 typedef double (*penalidade_fn)(char, char);
 typedef struct _solucao_t  solucao_t;

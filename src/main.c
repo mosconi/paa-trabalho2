@@ -23,6 +23,12 @@ delta(char A, char B) {
     return 1.0;
 };
 
+void
+signal_segfault(int seg_num){
+    printf ("\nsegmentation fault...\n");
+}
+
+
 
 static void
 usage(void){
@@ -140,7 +146,7 @@ do_or_timeout(struct timespec *max_wait, struct thr_args *args) {
     
     clock_gettime(CLOCK_REALTIME, &tsf);
     if (err == ETIMEDOUT) {
-	fprintf(stderr, "%s: calculation timed out\n", args->name);
+	printf( "%s: calculation timed out\n", args->name);
 	rc = false;
     }
 
@@ -149,7 +155,7 @@ do_or_timeout(struct timespec *max_wait, struct thr_args *args) {
     double elaps_s = difftime(tsf.tv_sec, tsi.tv_sec);
     long elaps_ns = tsf.tv_nsec - tsi.tv_nsec;
     elaps_s  +=  ((double)elaps_ns) / 1.0e9; 
-    fprintf(stderr, "%s: calculation ok: %f seg\n", args->name, elaps_s);
+    printf( "%s: calculation ok: %f seg\n", args->name, elaps_s);
 
     return rc;
 }
@@ -181,12 +187,48 @@ tarefa2a(int argc, char **argv){
 	    return -1;
 	}
     }
-    
+    struct timespec tqi, tqf;
+
+    signal(SIGSEGV, signal_segfault);
+
+    print_memory_usage=true;
     for (int i = run_i>0? run_i : 1;
 	 i <= (run_i>0? run_i : 14);
 	 i++) 
 	for (int j = j_start; j<=j_stop; j++) {
-	    fprintf (stderr, "TODO i= %d, j=%d...\n", i, j);
+
+	    size_t sz = 10 * ipow (2,i);
+	    printf ("i= %d, j=%d, size = %zu...\n", i, j, sz);
+	    char **strings = generate(sz);
+
+	    clock_gettime(CLOCK_REALTIME, &tqi);
+	    solucao_t *t = procurar_solucao_quadratico(strarg(strings[0]),
+						       strarg(strings[1]),
+						       gap,delta);
+	    clock_gettime(CLOCK_REALTIME, &tqf);
+
+	    solucao_destroy(&t);
+	    
+	    double elaps_q = difftime(tqf.tv_sec, tqi.tv_sec);
+	    long elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
+	    elaps_q  +=  ((double)elaps_ns) / 1.0e9;
+
+
+	    clock_gettime(CLOCK_REALTIME, &tqi);
+	    
+	    t = procurar_solucao_linear(strarg(strings[0]),
+						       strarg(strings[1]),
+						       gap,delta);
+	    clock_gettime(CLOCK_REALTIME, &tqf);
+	    double elaps_l = difftime(tqf.tv_sec, tqi.tv_sec);
+	    elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
+	    elaps_l  +=  ((double)elaps_ns) / 1.0e9;
+
+	    printf("  quadratico: tempo = %f\n", elaps_q );
+	    printf("  linear    : tempo = %f\n", elaps_l );
+	    
+	    solucao_destroy(&t);
+	    
 	}
     
     return 0;

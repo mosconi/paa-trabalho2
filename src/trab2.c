@@ -1,5 +1,8 @@
 #include "trab2.h"
 
+
+bool print_memory_usage=false;
+
 struct _solucao_t {
     size_t pos_A;
     size_t pos_B;
@@ -112,6 +115,9 @@ procurar_solucao_quadratico(const char *origem, const size_t m, const char*desti
 	    return NULL;
 	}
     }
+    struct proc_t usage;
+    look_up_our_self(&usage);
+    printf("usage: %lu\n", usage.vsize);
     return solucao;
 
 }
