@@ -35,6 +35,13 @@ $(T2A): $(P)
 $(T2B): $(P)
 	ln -f $< $@
 
+
+package: $(P).tgz
+tgz: $(P).tgz
+
+$(P).tgz: 
+	tar -czf $@ Makefile src include
+
 clean:
 	rm -f *.o src/*.o
 	rm -f $(P) lib$(P).a $(P)_ut  $(T2A) $(T2B)
