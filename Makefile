@@ -4,7 +4,8 @@ T2B = tarefa2b
 OBJS = src/trab2.o
 OBJS+= src/graph.o
 OBJS+= src/list.o
-OBJS+= src/set.o 	
+OBJS+= src/set.o
+OBJS+= src/rss.o
 
 DEBUG_FLAGS = -g -O0
 #DEBUG_FLAGS =
@@ -12,7 +13,7 @@ RELEASE = -s -Os -O3
 
 CFLAGS = -Wall  -std=c99 -Iinclude -pthread -Werror -Wno-unused-variable $(DEBUG_FLAGS)
 LDFLAGS = -Wall -g -std=c99 -Werror -pthread  $(DEBUG_FLAGS)
-LDLIBS = -lm -lgcov -lrt -lprocps
+LDLIBS = -lm -lgcov -lrt 
 
 
 all: $(P) $(P)_ut $(T2A) $(T2B)

@@ -23,11 +23,6 @@ delta(char A, char B) {
     return 1.0;
 };
 
-void
-signal_segfault(int seg_num){
-    printf ("\nsegmentation fault...\n");
-}
-
 
 
 static void
@@ -55,35 +50,22 @@ ipow (size_t base, size_t i) {
     return pre * val *val ;
 }
 
-static char **
+static char *
 generate (size_t size) {
     assert(size >0);
-    char **str = calloc(sizeof(char *),2);
+    char *str = calloc(size+1,2);
 
     if (!str)
-	goto ERROR;
-    
-    str[0] = calloc(size+1,1);
-    if (!str[0])
-	goto ERROR;
-    
-    str[1] = calloc(size+1,1);
-    if (!str[1])
 	goto ERROR;
     
     size_t l = strlen(VALID_CHARS);
 
     srand(time(NULL));
     for (long long i = 0; i<size; i++) {
-	str[0][i] = VALID_CHARS[rand()%l];
-	str[1][i] = VALID_CHARS[rand()%l];
+	str[i] = VALID_CHARS[rand()%l];
     }
     return str;
  ERROR:
-    if (str[1])
-	free(str[1]);
-    if (str[1])
-    	free(str[0]);
     free(str);
     return NULL;
 }
@@ -189,8 +171,6 @@ tarefa2a(int argc, char **argv){
     }
     struct timespec tqi, tqf;
 
-    signal(SIGSEGV, signal_segfault);
-
     print_memory_usage=true;
     for (int i = run_i>0? run_i : 1;
 	 i <= (run_i>0? run_i : 14);
@@ -199,11 +179,12 @@ tarefa2a(int argc, char **argv){
 
 	    size_t sz = 10 * ipow (2,i);
 	    printf ("i= %d, j=%d, size = %zu...\n", i, j, sz);
-	    char **strings = generate(sz);
+	    char *string1 = generate(sz);
+	    char *string2 = generate(sz);
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
-	    solucao_t *t = procurar_solucao_quadratico(strarg(strings[0]),
-						       strarg(strings[1]),
+	    solucao_t *t = procurar_solucao_quadratico(strarg(string1),
+						       strarg(string2),
 						       gap,delta);
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 
@@ -216,9 +197,10 @@ tarefa2a(int argc, char **argv){
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
 	    
-	    t = procurar_solucao_linear(strarg(strings[0]),
-						       strarg(strings[1]),
-						       gap,delta);
+	    t = procurar_solucao_linear(strarg(string1),
+					strarg(string2),
+					gap,delta);
+	    
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 	    double elaps_l = difftime(tqf.tv_sec, tqi.tv_sec);
 	    elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
@@ -228,6 +210,7 @@ tarefa2a(int argc, char **argv){
 	    printf("  linear    : tempo = %f\n", elaps_l );
 	    
 	    solucao_destroy(&t);
+	    printf("  memoria (Peek): %zu\n", getPeakRSS());
 	    
 	}
     
@@ -290,12 +273,14 @@ tarefa2b(int argc, char **argv){
 
 	printf("\ni = %d, timeout = %d segundos\n", i , timeout);
 	
-	char **strings = generate(ipow(2,i));	
+	char *string1 = generate(ipow(2,i));
+	char *string2 = generate(ipow(2,i));	
 
-	if (!strings) return -2;
+	if (!string1) return -2;
+	if (!string2) return -2;
 
-	args.string1=strings[0];
-	args.string2=strings[1];
+	args.string1=string1;
+	args.string2=string2;
 	args.gap = gap;
 	args.delta = delta;
 
@@ -311,9 +296,8 @@ tarefa2b(int argc, char **argv){
 	    run_quad = do_or_timeout(&max_wait, &args);
 	
 	}
-	free (strings[0]);
-	free (strings[1]);
-	free (strings);
+	free (string1);
+	free (string2);
 	args.string1=NULL;
 	args.string2=NULL;
     }
@@ -351,15 +335,16 @@ test_generate(int argc, char **argv){
     }
 
     size_t sz = ipow(2,i);
-    char **strings = generate(sz);
-    if (!strings) return -1;
-    for (int k = 0; k < 2; k++)
+
+ 
+    for (int k = 0; k < 2; k++) {
+	char *strings = generate(sz);
+	if (!strings) return -1;
 	printf("string %d:\n---- BEGIN ----\n%s\n---- END ----\n\n",
-	       k+1, strings[k]);
+	       k+1, strings);
+	free(strings);
+    }
 	
-    free(strings[0]);
-    free(strings[1]);
-    free(strings);
     return 0;
 }
 
