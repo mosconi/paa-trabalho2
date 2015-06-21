@@ -22,6 +22,7 @@ s_min(double list[]){
 
 #define min(...) s_min((double []){__VA_ARGS__,NAN})
 
+
 double 
 alinhamento_quadratico_custo(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
 
@@ -87,6 +88,7 @@ alinhamento_linear_custo(const char *origem, size_t m, const char*destino, size_
     return corrente[m];
 }
 
+
 solucao_t *
 procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade){
     double M[m+1][n+1];
@@ -146,4 +148,10 @@ solucao_print(solucao_t *self) {
     }
     
     printf("\n");
+}
+
+solucao_t *
+procurar_solucao_linear(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade){
+
+    return NULL;
 }

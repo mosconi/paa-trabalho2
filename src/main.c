@@ -40,6 +40,9 @@ ipow (size_t base, size_t i) {
 
     if (i==1)
 	return base;
+
+    if (i>=64)
+	return 0xFFFFFFFFFFFFFFFE;
     
     size_t val = ipow ( base, hi);
     
@@ -78,20 +81,79 @@ generate (size_t size) {
     free(str);
     return NULL;
 }
-/*
+
+struct thr_args {
+    char *name;
+    alinhamento_fn funcao;
+    char *string1;
+    char *string2;
+    double gap;
+    penalidade_fn delta;
+};
+
+
 void *
 pthread_wrapper(void *data) {
     assert (data);
-    char **strings = data;
+    struct thr_args *args = data;
+
+    int oldtype;
+    
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
+
+    solucao_t *t = args->funcao(strarg(args->string1),
+				strarg(args->string2),
+				args->gap, args->delta
+				);
+    solucao_destroy(&t);
+
+    pthread_cond_signal(&done);
+    return NULL;
     
 };
 
-static int
-do_or_timeout(struct timespec max_wait) {
+static bool
+do_or_timeout(struct timespec *max_wait, struct thr_args *args) {
 
-	return 0
+    struct timespec abs_time;
+    
+    struct timespec tsi, tsf;
+    pthread_t tid;
+    int err;
+
+    bool rc = true;
+
+    pthread_mutex_lock(&calculating);
+
+    /* pthread cond_timedwait expects an absolute time to wait until */
+    clock_gettime(CLOCK_REALTIME, &abs_time);
+    abs_time.tv_sec += max_wait->tv_sec;
+    abs_time.tv_nsec += max_wait->tv_nsec;
+
+    clock_gettime(CLOCK_REALTIME, &tsi);
+    pthread_create(&tid, NULL, pthread_wrapper , args);
+
+    /* pthread_cond_timedwait can return spuriously: this should
+     * be in a loop for production code
+     */
+    err = pthread_cond_timedwait(&done, &calculating, &abs_time);
+    
+    clock_gettime(CLOCK_REALTIME, &tsf);
+    if (err == ETIMEDOUT) {
+	fprintf(stderr, "%s: calculation timed out\n", args->name);
+	rc = false;
+    }
+
+    if (!err)
+	pthread_mutex_unlock(&calculating);
+    double elaps_s = difftime(tsf.tv_sec, tsi.tv_sec);
+    long elaps_ns = tsf.tv_nsec - tsi.tv_nsec;
+    elaps_s  +=  ((double)elaps_ns) / 1.0e9; 
+    fprintf(stderr, "%s: calculation ok: %f seg\n", args->name, elaps_s);
+
+    return rc;
 }
-*/
+
 
 static int
 tarefa2a(int argc, char **argv){
@@ -145,7 +207,7 @@ tarefa2b(int argc, char **argv){
 
     int opt;
     
-    while ((opt=getopt(argc,argv,"blqsm")) != -1) {
+    while ((opt=getopt(argc,argv,"blqs:m:")) != -1) {
 	switch (opt) {
 	case 's':
 	    timeout = atoi(optarg) ;
@@ -177,32 +239,41 @@ tarefa2b(int argc, char **argv){
     
     max_wait.tv_sec = timeout;
 
+
+    struct thr_args args;
+    memset(&args, 0 , sizeof(args));
     
-    bool run = true;
-    for (int i = 1; run; i++) {
-	char **strings = generate(ipow(2,i));
+
+    for (int i = 1; run_linear | run_quad ; i++) {
+
+	printf("\ni = %d, timeout = %d segundos\n", i , timeout);
+	
+	char **strings = generate(ipow(2,i));	
+
 	if (!strings) return -2;
+
+	args.string1=strings[0];
+	args.string2=strings[1];
+	args.gap = gap;
+	args.delta = delta;
+
 	
 	if (run_linear) {
-	    /*
-	      do_or_timeout(&max_wait);
-	    solucao_t *t = procurar_solucao_linear(strarg(strings[0]),
-						strarg(strings[1]),
-						gap,delta);
-	    solucao_destroy(&t);
-	    */
-	    
+	    args.name = "linear";
+	    args.funcao = procurar_solucao_linear;
+	    run_linear = do_or_timeout(&max_wait, &args);
 	}
 	if (run_quad) {
-	    /*
-	    solucao_t *t = procurar_solucao_linear(strarg(strings[0]),
-						   strarg(strings[0]),
-						   gap,delta);
-	    solucao_destroy(&t);
-	    */
+	    args.name = "quadratico";
+	    args.funcao = procurar_solucao_linear;
+	    run_quad = do_or_timeout(&max_wait, &args);
+	
 	}
+	free (strings[0]);
+	free (strings[1]);
 	free (strings);
-	    
+	args.string1=NULL;
+	args.string2=NULL;
     }
     
     return 0;
@@ -239,7 +310,8 @@ test_generate(int argc, char **argv){
 
     size_t sz = ipow(2,i);
     char **strings = generate(sz);
-    for (int k = 0; k <2; k++)
+    if (!strings) return -1;
+    for (int k = 0; k < 2; k++)
 	printf("string %d:\n---- BEGIN ----\n%s\n---- END ----\n\n",
 	       k+1, strings[k]);
 	

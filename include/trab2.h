@@ -56,9 +56,14 @@ alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const ch
 solucao_t *
 procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
+solucao_t *
+procurar_solucao_linear(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+
 
 double
 alinhamento_linear_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
+typedef solucao_t *
+(*alinhamento_fn)(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade) ;
 
 #endif

@@ -10,8 +10,8 @@ DEBUG_FLAGS = -g -O0
 #DEBUG_FLAGS =
 RELEASE = -s -Os -O3
 
-CFLAGS = -Wall  -std=c99 -Iinclude  -Werror -static $(DEBUG_FLAGS)
-LDFLAGS = -Wall -g -std=c99 -Werror -static $(DEBUG_FLAGS)
+CFLAGS = -Wall  -std=c99 -Iinclude -pthread -Werror  $(DEBUG_FLAGS)
+LDFLAGS = -Wall -g -std=c99 -Werror -pthread  $(DEBUG_FLAGS)
 LDLIBS = -lm -lgcov 
 
 
