@@ -9,8 +9,13 @@
 #include <float.h>
 #include <math.h>
 #include <stddef.h>
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+/* for ETIMEDOUT */
+#include <errno.h>
 
 #if (defined (_MSC_VER))
 #   if (!defined (__cplusplus) && (!defined (true)))
@@ -25,6 +30,8 @@
 #include "list.h"
 #include "set.h"
 #include "graph.h"
+
+#define streq(A,B) 0==strcmp(A,B)
 
 typedef double (*penalidade_fn)(char, char);
 typedef struct _solucao_t  solucao_t;

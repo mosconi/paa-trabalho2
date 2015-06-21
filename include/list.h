@@ -27,6 +27,12 @@ list_tail(list_t *list);
 size_t
 list_size(const list_t *list);
 
+int
+list_insert(list_t *list,  void *ref, void *data);
+
+void *
+list_remove(list_t *list,  void *ref);
+
 void *
 list_first(list_t *list);
 
@@ -43,7 +49,7 @@ void *
 list_item(list_t *list);
 
 void *
-list_find(list_t *list, const void *data, cmp_fn *cmp_fn);
+list_find(list_t *list,  void *data, cmp_fn *cmp_fn);
 
 void
 list_selftest (void);

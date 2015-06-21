@@ -13,13 +13,13 @@ void
 set_destroy (set_t **);
 
 int
-set_insert (set_t *, const void *data);
+set_insert (set_t *, void *data);
 
-int
-set_remove (set_t *, const void *data);
+void *
+set_remove (set_t *, void *data);
 
 set_t *
-set_union(set_t *set1, set_t set2);
+set_union(set_t *set1, set_t *set2);
 
 set_t *
 set_union_n(set_t *sets[]);
@@ -27,16 +27,16 @@ set_union_n(set_t *sets[]);
 #define set_vaunion(...) set_union_n({__VA_ARGS__,NULL})
 
 set_t *
-set_intersection(set_t *set1, set_t set2);
+set_intersection(set_t *set1, set_t *set2);
 
 set_t *
-set_difference(set_t *set1, set_t set2);
+set_difference(set_t *set1, set_t *set2);
 
 size_t
 set_size(const set_t *);
 
 bool
-set_hasmenber (const set_t *set, const void *data);
+set_hasmenber (const set_t *set, void *data);
 
 bool
 set_subset (const set_t *set, const set_t * set2);

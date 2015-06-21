@@ -43,13 +43,31 @@ set_destroy (set_t **set_p){
 }
 
 int
-set_insert (set_t *, const void *data);
+set_insert (set_t *set, void *data){
+    assert(set);
 
-int
-set_remove (set_t *, const void *data);
+    if(list_find(set->list, data, set->cmp))
+	return 0;
+
+    return list_append(set->list, data);
+}
+
+void *
+set_remove (set_t *set, void *data){
+    assert(set);
+    assert (data);
+    return list_remove(set->list, data);
+}
 
 set_t *
-set_union(set_t *set1, set_t set2);
+set_union(set_t *set1, set_t *set2){
+    assert(set1);
+    assert(set2);
+
+    set_t *setu= set_new(set1->cmp,set1->destroy);
+    
+    return setu;
+}
 
 set_t *
 set_union_n(set_t *sets[]);
@@ -57,10 +75,10 @@ set_union_n(set_t *sets[]);
 #define set_vaunion(...) set_union_n({__VA_ARGS__,NULL})
 
 set_t *
-set_intersection(set_t *set1, set_t set2);
+set_intersection(set_t *set1, set_t *set2);
 
 set_t *
-set_difference(set_t *set1, set_t set2);
+set_difference(set_t *set1, set_t *set2);
 
 size_t
 set_size(const set_t *set){
@@ -69,14 +87,14 @@ set_size(const set_t *set){
 }
 
 bool
-set_hasmember (const set_t *set, const void *data){
+set_hasmember (const set_t *set, void *data){
     assert (set);
     assert (data);
 
-    if (!list_find(set->list, data, set->cmp))
-	return false;
+    if (list_find(set->list, data, set->cmp))
+	return true;
 
-    return true;	    
+    return false;	    
 }
 
 bool

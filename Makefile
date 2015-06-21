@@ -1,19 +1,23 @@
 P = trabalho2
-
+T2A = tarefa2a
+T2B = tarefa2b
 OBJS = src/trab2.o
 OBJS+= src/graph.o
 OBJS+= src/list.o
 OBJS+= src/set.o 	
 
+DEBUG_FLAGS = -g -O0
+#DEBUG_FLAGS =
+RELEASE = -s -Os -O3
 
-CFLAGS = -Wall -g -std=c99 -Iinclude -O0  -Werror
-LDFLAGS = -Wall -g -std=c99 -Werror
-LDLIBS = -lm -lgcov  -L. -l${P}
+CFLAGS = -Wall  -std=c99 -Iinclude  -Werror -static $(DEBUG_FLAGS)
+LDFLAGS = -Wall -g -std=c99 -Werror -static $(DEBUG_FLAGS)
+LDLIBS = -lm -lgcov 
 
 
-all: $(P) $(P)_ut
+all: $(P) $(P)_ut $(T2A) $(T2B)
 
-.c.o: %.h
+.c.o: 
 	$(CC) -c $(CFLAGS) -o $@ $< 
 
 lib$(P).a: $(OBJS)
@@ -25,9 +29,15 @@ $(P): src/main.o lib$(P).a
 $(P)_ut: src/tests.o lib$(P).a
 	$(CC) -o $@ $(LDFLAGS) $(LDLIBS) $^ 
 
+$(T2A): $(P)
+	ln -f $< $@
+
+$(T2B): $(P)
+	ln -f $< $@
+
 clean:
 	rm -f *.o src/*.o
-	rm -f $(P) lib$(P).a $(P)_ut
+	rm -f $(P) lib$(P).a $(P)_ut  $(T2A) $(T2B)
 
 test: $(P)_ut
 	./$(P)_ut
