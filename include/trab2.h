@@ -54,9 +54,6 @@
 
 #include "rss.h"
 
-#include "list.h"
-#include "set.h"
-#include "graph.h"
 
 #define streq(A,B) 0==strcmp(A,B)
 

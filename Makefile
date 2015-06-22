@@ -2,13 +2,9 @@ P = trabalho2
 T2A = tarefa2a
 T2B = tarefa2b
 OBJS = src/trab2.o
-OBJS+= src/graph.o
-OBJS+= src/list.o
-OBJS+= src/set.o
 OBJS+= src/rss.o
 
 DEBUG_FLAGS = -g -O0
-#DEBUG_FLAGS =
 RELEASE = -s -Os -O3
 
 CFLAGS = -Wall  -std=c99 -Iinclude -pthread -Werror -Wno-unused-variable $(DEBUG_FLAGS)

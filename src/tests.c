@@ -144,8 +144,4 @@ main(void){
     solucao_print(t);
     solucao_destroy(&t);
 
-    list_selftest();
-    set_selftest();
-    graph_selftest();
-
 };
