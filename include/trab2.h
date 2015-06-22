@@ -74,6 +74,11 @@ solucao_print(solucao_t *);
 void
 solucao_destroy(solucao_t**);
 
+bool
+solucao_eq(solucao_t*, solucao_t*);
+
+solucao_t *
+solucao_merge(solucao_t*, solucao_t*);
 
 double 
 alinhamento_quadratico_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
@@ -91,6 +96,9 @@ procurar_solucao_linear(const char *origem, const size_t m, const char*destino, 
 
 double
 alinhamento_linear_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+
+double
+alinhamento_linear_custo_array(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,double array[m+1]);
 
 typedef solucao_t *
 (*alinhamento_fn)(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade) ;

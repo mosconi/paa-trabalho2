@@ -50,6 +50,7 @@ ipow (size_t base, size_t i) {
     return pre * val *val ;
 }
 
+
 static char *
 generate (size_t size) {
     assert(size >0);
@@ -60,7 +61,6 @@ generate (size_t size) {
     
     size_t l = strlen(VALID_CHARS);
 
-    srand(time(NULL));
     for (long long i = 0; i<size; i++) {
 	str[i] = VALID_CHARS[rand()%l];
     }
@@ -146,6 +146,7 @@ do_or_timeout(struct timespec *max_wait, struct thr_args *args) {
 static int
 tarefa2a(int argc, char **argv){
 
+    srand(time(NULL));
 
     int opt;
 
@@ -183,33 +184,40 @@ tarefa2a(int argc, char **argv){
 	    char *string2 = generate(sz);
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
-	    solucao_t *t = procurar_solucao_quadratico(strarg(string1),
+	    solucao_t *t_q = procurar_solucao_quadratico(strarg(string1),
 						       strarg(string2),
 						       gap,delta);
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 
-	    solucao_destroy(&t);
 	    
 	    double elaps_q = difftime(tqf.tv_sec, tqi.tv_sec);
 	    long elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
 	    elaps_q  +=  ((double)elaps_ns) / 1.0e9;
+	    printf("  quadratico: tempo = %f\n", elaps_q );
 
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
 	    
-	    t = procurar_solucao_linear(strarg(string1),
-					strarg(string2),
-					gap,delta);
+	    solucao_t *t_l = procurar_solucao_linear(strarg(string1),
+						     strarg(string2),
+						     gap,delta);
 	    
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 	    double elaps_l = difftime(tqf.tv_sec, tqi.tv_sec);
 	    elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
 	    elaps_l  +=  ((double)elaps_ns) / 1.0e9;
 
-	    printf("  quadratico: tempo = %f\n", elaps_q );
 	    printf("  linear    : tempo = %f\n", elaps_l );
-	    
-	    solucao_destroy(&t);
+	    printf("    eq      : %s\n", solucao_eq(t_q, t_l)?"sim":"nao");
+
+	    if (i==1) {
+		printf("string1: %s\n", string1);
+		printf("string2: %s\n", string2);
+		solucao_print(t_q);
+		solucao_print(t_l);
+	    }
+	    solucao_destroy(&t_q);
+	    solucao_destroy(&t_l);
 	    printf("  memoria (Peek): %zu\n", getPeakRSS());
 	    
 	}
