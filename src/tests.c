@@ -42,6 +42,14 @@ main(void){
     _TEST(alinhamento_quadratico_custo, test,"AA","BA",gap,delta,1.0,err);
     _TEST(alinhamento_quadratico_custo, test,"AB","BA",gap,delta,1.4,err);
     _TEST(alinhamento_quadratico_custo, test,"AB","CD",gap,delta,2.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAAA","AAAA",gap,delta,0.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"AAAA","AABA",gap,delta,1.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"BABACA","BANANA",gap,delta,2.0,err);
+    _TEST(alinhamento_quadratico_custo, test,"CABANA","BACANA",gap,delta,2.0,err);
 
     printf ("\ntestes unitários -- custo linear\n");
 
@@ -55,6 +63,14 @@ main(void){
     _TEST(alinhamento_linear_custo, test,"AA","BA",gap,delta,1.0,err);
     _TEST(alinhamento_linear_custo, test,"AB","BA",gap,delta,1.4,err);
     _TEST(alinhamento_linear_custo, test,"AB","CD",gap,delta,2.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAAA","AAAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo, test,"AAAA","AABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo, test,"BABACA","BANANA",gap,delta,2.0,err);
+    _TEST(alinhamento_linear_custo, test,"CABANA","BACANA",gap,delta,2.0,err);
 
     printf ("\ntestes unitários -- custo linear com corte\n");
 
@@ -68,7 +84,15 @@ main(void){
     _TEST(alinhamento_linear_custo2, test,"AA","BA",gap,delta,1.0,err);
     _TEST(alinhamento_linear_custo2, test,"AB","BA",gap,delta,1.4,err);
     _TEST(alinhamento_linear_custo2, test,"AB","CD",gap,delta,2.0,err);
-
+    _TEST(alinhamento_linear_custo2, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AAA","AAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AAA","ABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AAAA","AAAA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AAAA","AABA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"BABACA","BANANA",gap,delta,2.0,err);
+    _TEST(alinhamento_linear_custo2, test,"CABANA","BACANA",gap,delta,2.0,err);
+    
     printf ("\ntestes unitários -- classe de solucão\n");
 
     printf ("new(0,0,NULL): ");
