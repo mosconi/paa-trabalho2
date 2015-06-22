@@ -243,10 +243,28 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
     return true;
 }
 
-    
+
+
+/*
+  Algoritmo baseado em 
+  http://par.cse.nsysu.edu.tw/~wuys/Hirschberg%20Algorithm%20C(Divide%20and%20Conquer,%201975).html
+
+  Este algoritmo computa o melhor caminho de (0,0) até a linha N/2 e de (m,n) até a linha N/2. Em 
+  sequida localiza a coluna 0 <= k <= M que minimiza a solução.
+
+  Invoca find_sol_linear_base() no para as regiões (0,0) <=> (k,N/2) e (k,N/2) <=> (M,N).  
+
+  retorna a união (concat) das duas.
+
+ */
 static solucao_t *
 procurar_solucao_linear_base(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, size_t base_m,size_t base_n ){
 
+    /*
+      para valores pequenos de m ou n, o consumo de memória é similar.
+
+      Caso m<=2 ou n<=2, será usado a procura quadratica.
+     */
     if (m<=2 || n<=2) 
 	return procurar_solucao_base(origem,m,
 				     destino,n,
@@ -255,7 +273,7 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
     
 
 
-        double ultimo_metade1[m+1];
+    double ultimo_metade1[m+1];
     double corrente_metade1[m+1];
     double ultimo_metade2[m+1];
     double corrente_metade2[m+1];
