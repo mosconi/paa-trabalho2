@@ -110,8 +110,10 @@ procurar_solucao_quadratico(const char *origem, const size_t m, const char*desti
     double M[m+1][n+1];
 
     double val = alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
+    /*
     fprintf(stderr, "      minval : %f\n", val); 
-
+    */
+    if (val) {}
     size_t i= m;  size_t j= n;
 
     solucao_t *solucao=NULL;
@@ -289,9 +291,9 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
     }
     
     size_t j=0;
-    double min_val=corrente_metade1[0] + corrente_metade2[m] ; 
+    double min_val = INFINITY; 
 
-    for (int i =0; i<=m; i++){
+    for (int i =0; i<=min(m,n); i++){
 	double val = corrente_metade1[i]+corrente_metade2[m-i];
 	if (val <=min_val) {
 	    min_val = val;
@@ -299,12 +301,13 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
 	}
 	    
     }
+    /*
     fprintf(stderr, "     min_val: %f\n",min_val);
     fprintf(stderr, "   string1 : <%.*s>\n",(int)m,origem);
     fprintf(stderr, "   string1 : <%.*s><%.*s>\n",
 	    (int)m/2, origem,
 	    (int)(m-m/2), origem+m/2 );
-    
+    */
     solucao_t *sol_metade1 = procurar_solucao_linear_base(origem,m/2,
 							  destino,j,
 							  gap,penalidade,
@@ -312,11 +315,13 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
     solucao_t *sol_metade2 = procurar_solucao_linear_base(origem+(m/2),m-m/2,
 							  destino+j,n-j,
 							  gap,penalidade,
-							  base_m+m/2, base_n+j
-						     );
+							  base_m+m/2, base_n+j);
+
+    solucao_t * sol = solucao_merge(sol_metade1,sol_metade2);
+    
 
     
-    return solucao_merge(sol_metade1,sol_metade2);
+    return sol;
 }
 
 
@@ -326,4 +331,69 @@ procurar_solucao_linear(const char *origem, const size_t m,
 			const double gap, penalidade_fn penalidade) {
     
     return procurar_solucao_linear_base(origem,m,destino,n,gap,penalidade,0,0);
+}
+
+double
+alinhamento_linear_custo2(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
+
+    if (m<2 || n<2)
+	return alinhamento_quadratico_custo(origem,m,
+					    destino,n,
+					    gap,penalidade);
+
+    double ultimo_metade1[m+1];
+    double corrente_metade1[m+1];
+    double ultimo_metade2[m+1];
+    double corrente_metade2[m+1];
+    
+    for (int i=0; i<=m; i++){
+	corrente_metade1[i] = i*gap;
+	corrente_metade2[m-i] = i*gap;
+    }
+
+    for (int j=1; j<=n/2;j++) {	
+	for (int i=0; i<=m; i++)
+	    ultimo_metade1[i] = corrente_metade1[i];
+	
+	corrente_metade1[0] = j*gap;
+
+	for (int i=1; i<=m; i++){
+	    double val1=
+		penalidade(origem[i-1],destino[j-1])
+		+ ultimo_metade1[i-1];
+	    double val2=gap + corrente_metade1[i-1];
+	    double val3=gap + ultimo_metade1[i];
+
+	    corrente_metade1[i] = min (val1, val2, val3);
+	}
+    }
+
+    for(int j=n-1; j>n/2;j--) {
+	for (int i=0; i<=m; i++)
+	    ultimo_metade2[i] = corrente_metade2[i];
+	
+	corrente_metade2[m] = (n-j)*gap;
+	for (int i=m-1; i>0; i--){
+	    double val1=
+		penalidade(origem[i+1],destino[j+1])
+		+ ultimo_metade1[i+1];
+	    double val2=gap + corrente_metade2[i+1];
+	    double val3=gap + ultimo_metade2[i];
+
+	    corrente_metade2[i] = min (val1, val2, val3);
+	}
+
+
+    }
+    
+    double min_val= INFINITY ; 
+
+    for (int i =0; i<=min(m,n); i++){
+	double val = corrente_metade1[i]+corrente_metade2[m-i];
+	if (val <=min_val) {
+	    min_val = val;
+	}
+	    
+    }
+    return min_val;
 }

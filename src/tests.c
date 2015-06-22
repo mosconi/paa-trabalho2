@@ -56,6 +56,19 @@ main(void){
     _TEST(alinhamento_linear_custo, test,"AB","BA",gap,delta,1.4,err);
     _TEST(alinhamento_linear_custo, test,"AB","CD",gap,delta,2.0,err);
 
+    printf ("\ntestes unitários -- custo linear com corte\n");
+
+    _TEST(alinhamento_linear_custo2, test,"","",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"A","A",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"A","",gap,delta,0.7,err);
+    _TEST(alinhamento_linear_custo2, test,"A","B",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AA","AA",gap,delta,0.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AA"," AA",gap,delta,0.7,err);
+    _TEST(alinhamento_linear_custo2, test," A","AA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AA","BA",gap,delta,1.0,err);
+    _TEST(alinhamento_linear_custo2, test,"AB","BA",gap,delta,1.4,err);
+    _TEST(alinhamento_linear_custo2, test,"AB","CD",gap,delta,2.0,err);
+
     printf ("\ntestes unitários -- classe de solucão\n");
 
     printf ("new(0,0,NULL): ");
