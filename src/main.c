@@ -10,7 +10,7 @@ pthread_cond_t done = PTHREAD_COND_INITIALIZER;
 
 #define strarg(s) s, strlen(s)
 
-static const char *VALID_CHARS="ABCD";
+static const char *VALID_CHARS="ABCN";
 
 extern char *__progname;
 
@@ -312,17 +312,19 @@ tarefa2b(int argc, char **argv){
     
     return 0;
 }
-/*
+
 static int
 testsz (int argc, char **argv){
     printf("sizeof:\n");
     printf("size_t = %zu\n",sizeof(size_t));
     printf("int = %zu\n",sizeof(int));
     printf("long int = %zu\n",sizeof(long int));
+    printf("long  = %zu\n",sizeof(long ));
+    printf("long long int = %zu\n",sizeof(long long int));
     printf("__int128_t = %zu\n",sizeof(__int128_t));
     return 0;
 }
-*/
+
 static int
 test_generate(int argc, char **argv){
 
@@ -374,13 +376,13 @@ main(int argc, char **argv){
 	     streq("tarefa2b",argv[0]))
 
 	rc = tarefa2b(argc,argv);
-    /*
+
     else if (
 	     streq("testsz",__progname) ||
 	     streq("testsz",argv[0]))
 
 	rc = testsz(argc,argv);
-    */
+
     else if (
 	     streq("test",__progname) ||
 	     streq("test",argv[0]) ||

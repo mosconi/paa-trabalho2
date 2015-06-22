@@ -1,5 +1,12 @@
 #include "trab2.h"
 
+/*
+  TODO:
+
+  - Trocar nomes alinhamento_()_custo para OPT_()
+  - Trocar nomes proc..._()_custo para find_sol_()
+
+*/
 
 bool print_memory_usage=false;
 
@@ -37,7 +44,9 @@ alinhamento_quadratico_custo(const char *origem, const size_t m, const char* des
 }
 
 double 
-alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade,
+alinhamento_quadratico_custo_matriz(const char *origem, const size_t m,
+				    const char* destino, const size_t n,
+				    const double gap, penalidade_fn penalidade,
 				    double M[m+1][n+1]){
 
     
@@ -234,16 +243,35 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
     return true;
 }
 
-    
+
+
+/*
+  Algoritmo baseado em 
+  http://par.cse.nsysu.edu.tw/~wuys/Hirschberg%20Algorithm%20C(Divide%20and%20Conquer,%201975).html
+
+  Este algoritmo computa o melhor caminho de (0,0) até a linha N/2 e de (m,n) até a linha N/2. Em 
+  sequida localiza a coluna 0 <= k <= M que minimiza a solução.
+
+  Invoca find_sol_linear_base() no para as regiões (0,0) <=> (k,N/2) e (k,N/2) <=> (M,N).  
+
+  retorna a união (concat) das duas.
+
+ */
 static solucao_t *
 procurar_solucao_linear_base(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, size_t base_m,size_t base_n ){
 
+    /*
+      para valores pequenos de m ou n, o consumo de memória é similar.
+
+      Caso m<=2 ou n<=2, será usado a procura quadratica.
+     */
     if (m<=2 || n<=2) 
 	return procurar_solucao_base(origem,m,
 				     destino,n,
 				     gap,penalidade,
 				     base_m,base_n);
     
+
 
     double ultimo_metade1[m+1];
     double corrente_metade1[m+1];
@@ -255,13 +283,14 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
 	corrente_metade2[m-i] = i*gap;
     }
 
-    for (int j=1; j<=n/2;j++) {	
-	for (int i=0; i<=m; i++)
+    for (long j=1; j<=(long)n/2; j++) {	
+	for (long i=0; i<=m; i++)
 	    ultimo_metade1[i] = corrente_metade1[i];
 	
 	corrente_metade1[0] = j*gap;
 
-	for (int i=1; i<=m; i++){
+	for (long i=1; i<=m; i++){
+
 	    double val1=
 		penalidade(origem[i-1],destino[j-1])
 		+ ultimo_metade1[i-1];
@@ -272,29 +301,31 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
 	}
     }
 
-    for(int j=n-1; j>n/2;j--) {
-	for (int i=0; i<=m; i++)
+    for(long j=n-1; j>=(long)n/2;j--) {
+	for (long i=0; i<=m; i++)
 	    ultimo_metade2[i] = corrente_metade2[i];
 	
 	corrente_metade2[m] = (n-j)*gap;
-	for (int i=m-1; i>0; i--){
+	for (long i=m-1; i>=0; i--){
+
 	    double val1=
-		penalidade(origem[i+1],destino[j+1])
-		+ ultimo_metade1[i+1];
+		penalidade(origem[i],destino[j])
+		+ ultimo_metade2[i+1];
 	    double val2=gap + corrente_metade2[i+1];
 	    double val3=gap + ultimo_metade2[i];
 
 	    corrente_metade2[i] = min (val1, val2, val3);
-	}
 
+ 	}
 
     }
-    
+
+
     size_t j=0;
     double min_val = INFINITY; 
 
     for (int i =0; i<=min(m,n); i++){
-	double val = corrente_metade1[i]+corrente_metade2[m-i];
+	double val = corrente_metade1[i]+corrente_metade2[i];
 	if (val <=min_val) {
 	    min_val = val;
 	    j=i;
@@ -336,11 +367,6 @@ procurar_solucao_linear(const char *origem, const size_t m,
 double
 alinhamento_linear_custo2(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
 
-    if (m<2 || n<2)
-	return alinhamento_quadratico_custo(origem,m,
-					    destino,n,
-					    gap,penalidade);
-
     double ultimo_metade1[m+1];
     double corrente_metade1[m+1];
     double ultimo_metade2[m+1];
@@ -351,13 +377,14 @@ alinhamento_linear_custo2(const char *origem, size_t m, const char*destino, size
 	corrente_metade2[m-i] = i*gap;
     }
 
-    for (int j=1; j<=n/2;j++) {	
-	for (int i=0; i<=m; i++)
+    for (long j=1; j<=(long)n/2; j++) {	
+	for (long i=0; i<=m; i++)
 	    ultimo_metade1[i] = corrente_metade1[i];
 	
 	corrente_metade1[0] = j*gap;
 
-	for (int i=1; i<=m; i++){
+	for (long i=1; i<=m; i++){
+
 	    double val1=
 		penalidade(origem[i-1],destino[j-1])
 		+ ultimo_metade1[i-1];
@@ -368,32 +395,34 @@ alinhamento_linear_custo2(const char *origem, size_t m, const char*destino, size
 	}
     }
 
-    for(int j=n-1; j>n/2;j--) {
-	for (int i=0; i<=m; i++)
+    for(long j=n-1; j>=(long)n/2;j--) {
+	for (long i=0; i<=m; i++)
 	    ultimo_metade2[i] = corrente_metade2[i];
 	
 	corrente_metade2[m] = (n-j)*gap;
-	for (int i=m-1; i>0; i--){
+	for (long i=m-1; i>=0; i--){
+
 	    double val1=
-		penalidade(origem[i+1],destino[j+1])
-		+ ultimo_metade1[i+1];
+		penalidade(origem[i],destino[j])
+		+ ultimo_metade2[i+1];
 	    double val2=gap + corrente_metade2[i+1];
 	    double val3=gap + ultimo_metade2[i];
 
 	    corrente_metade2[i] = min (val1, val2, val3);
-	}
 
+ 	}
 
     }
     
     double min_val= INFINITY ; 
 
-    for (int i =0; i<=min(m,n); i++){
-	double val = corrente_metade1[i]+corrente_metade2[m-i];
+    for (long i =0; i<=m; i++){
+	double val = corrente_metade1[i]+corrente_metade2[i];
 	if (val <=min_val) {
 	    min_val = val;
 	}
 	    
     }
+
     return min_val;
 }
