@@ -10,6 +10,7 @@ struct _solucao_t {
     struct _solucao_t *proximo;
 };
 
+// função para calcular o mínimo de uma lista terminada em NAN
 static double
 s_min(double list[]){
     double *p=list;
@@ -24,7 +25,9 @@ s_min(double list[]){
     return min;
 }
 
+// macro para converter arg variável em lista NAN terminada.
 #define min(...) s_min((double []){__VA_ARGS__,NAN})
+
 
 
 double 
@@ -106,8 +109,12 @@ opt_linear_array(const char *origem, size_t m, const char*destino, size_t n, dou
 }
 
 
+/* método baseado nas transparencias de aulas
 
+   retorna o opt mínimo e devolve a solução.
 
+   exibe o uso de memória antes de terminar.
+ */
 double 
 find_sol_quadratico(const char *origem, const size_t m,
 		    const char*destino, const size_t n,
@@ -265,7 +272,10 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
 
   Invoca find_sol_linear_base() no para as regiões (0,0) <=> (k,N/2) e (k,N/2) <=> (M,N).  
 
-  retorna a união (concat) das duas.
+  devolve a união (concat) das duas e retorna o opt mínimo.
+
+  Este método não exibe o úso de memória correte, pois como é um método recursivo, 
+  cada invocaçào mostraria o uso, poluindo assim a saída.
 
 */
 static double
@@ -371,6 +381,9 @@ find_sol_linear_base(const char *origem, const size_t m,
     return min_val;
 }
 
+/*
+  find_sol_linear pública, invoca o método recursivo.
+*/
 
 double
 find_sol_linear(const char *origem, const size_t m,
