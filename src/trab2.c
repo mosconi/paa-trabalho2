@@ -277,6 +277,7 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
   Este método não exibe o úso de memória correte, pois como é um método recursivo, 
   cada invocaçào mostraria o uso, poluindo assim a saída.
 
+  HDGRWD 
 */
 static double
 find_sol_linear_base(const char *origem, const size_t m,
@@ -297,18 +298,27 @@ find_sol_linear_base(const char *origem, const size_t m,
 			     base_m,base_n,
 			     sol_p);
     
+    /* 
+       vetores que armazanearam a lista corremte e última de cada metada.
 
+       como estamos usando um vetor em M, a tabela será percorrida em N
+
+     */
 
     double ultimo_metade1[m+1];
     double corrente_metade1[m+1];
     double ultimo_metade2[m+1];
     double corrente_metade2[m+1];
-    
+
+    // inicializando o primeiro correte com gaps somente.
     for (int i=0; i<=m; i++){
 	corrente_metade1[i] = i*gap;
 	corrente_metade2[m-i] = i*gap;
     }
 
+    /*
+      calculando a primeira metade: "linhas" 0-> N/2
+     */
     for (long j=1; j<=(long)n/2; j++) {	
 	for (long i=0; i<=m; i++)
 	    ultimo_metade1[i] = corrente_metade1[i];
@@ -326,6 +336,18 @@ find_sol_linear_base(const char *origem, const size_t m,
 	    corrente_metade1[i] = min (val1, val2, val3);
 	}
     }
+    
+    /*
+      calculando a segunda metade: "linhas" N-> N/2
+
+      Nesta parte a "tabela" é percorrida ao contrário.
+      
+      Vai do maior M,N até o (0,N/2).
+
+
+      vale ressaltar que a linha N/2 é processada 2 vezes
+      tanto na primeira parte, quando na segunda.
+    */
 
     for(long j=n-1; j>=(long)n/2;j--) {
 	for (long i=0; i<=m; i++)
@@ -347,10 +369,13 @@ find_sol_linear_base(const char *origem, const size_t m,
     }
 
 
+    /*
+      Localizando a coluna 
+     */
     size_t j=0;
     double min_val = INFINITY; 
 
-    for (int i =0; i<=min(m,n); i++){
+    for (int i =0; i<=m; i++){
 	double val = corrente_metade1[i]+corrente_metade2[i];
 	if (val <=min_val) {
 	    min_val = val;
