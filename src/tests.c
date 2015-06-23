@@ -130,47 +130,70 @@ main(void){
     solucao_print(t);
     solucao_destroy(&t);
 
-    printf ("\ntestes de uso\n");
+    printf ("\testes de find_sol\n");
 
     solucao_t *ref = NULL;
     ref = solucao_new(3,3, ref);
     ref = solucao_new(2,2, ref);
     ref = solucao_new(1,1, ref);
     ref = solucao_new(0,0, ref);
+    double val = 0;
 
-
-    printf ("\"ABCD\", \"ABCD\" == 0.0 via (0,0) (1,1) (2,2) (3,3):");
-    double val =  find_sol_quadratico("ABCD",4,"ABCD",4,gap,delta,&t);
+    printf ("\"ABCD\", \"ABCD\" == 0.0 via (0,0) (1,1) (2,2) (3,3) -- quad:");
+    val = find_sol_quadratico("ABCD",4,"ABCD",4,gap,delta,&t);
     assert ( abs(val - 0) <err);
     assert ( solucao_eq(ref, t)); 
 
     solucao_destroy(&t);
-    solucao_destroy(&ref);
     printf (" ok\n");
+
+    printf ("\"ABCD\", \"ABCD\" == 0.0 via (0,0) (1,1) (2,2) (3,3) -- linear:");
+    val = find_sol_linear("ABCD",4,"ABCD",4,gap,delta,&t);
+    assert ( abs(val - 0) <err);
+    assert ( solucao_eq(ref, t)); 
+    solucao_destroy(&t);
+    printf (" ok\n");
+
+    solucao_destroy(&ref);
 
     ref = solucao_new(3,2, ref);
     ref = solucao_new(2,1, ref);
     ref = solucao_new(1,0, ref);
     
-    printf ("\"ABCD\", \"BCD\"  == 0.7 via (1,0) (2,1) (3,2):");
+    printf ("\"ABCD\", \"BCD\"  == 0.7 via (1,0) (2,1) (3,2) -- quad:");
     val = find_sol_quadratico("ABCD",4,"BCD",3,gap,delta, &t);
     assert( abs(val - gap) <err);
     assert ( solucao_eq(ref, t)); 
     solucao_destroy(&t);
-    solucao_destroy(&ref);
     printf (" ok\n");
 
+    printf ("\"ABCD\", \"BCD\"  == 0.7 via (1,0) (2,1) (3,2) -- linear:");
+    val = find_sol_linear("ABCD",4,"BCD",3,gap,delta, &t);
+    assert( abs(val - gap) <err);
+    //assert ( solucao_eq(ref, t)); 
+    solucao_destroy(&t);
+    printf (" ok\n");
+
+    solucao_destroy(&ref);
+    
     ref = solucao_new(3,3, ref);
     ref = solucao_new(2,2, ref);
     ref = solucao_new(1,1, ref);
     ref = solucao_new(0,0, ref);
 
-    printf ("\"AAAA\", \"ABCD\" == 3.0 via (0,0) (1,1) (2,2) (3,3):");
+    printf ("\"AAAA\", \"ABCD\" == 3.0 via (0,0) (1,1) (2,2) (3,3) -- quad:");
     val = find_sol_quadratico("AAAA",4,"ABCD",4,gap,delta, &t);
     assert( abs(val - 3.0) <err);
     assert ( solucao_eq(ref, t)); 
     solucao_destroy(&t);
-    solucao_destroy(&ref);
     printf (" ok\n");
 
+    printf ("\"AAAA\", \"ABCD\" == 3.0 via (0,0) (1,1) (2,2) (3,3) -- linear:");
+    val = find_sol_linear("AAAA",4,"ABCD",4,gap,delta, &t);
+    assert( abs(val - 3.0) <err);
+    //assert ( solucao_eq(ref, t)); 
+    solucao_destroy(&t);
+    printf (" ok\n");
+
+    solucao_destroy(&ref);
 };
