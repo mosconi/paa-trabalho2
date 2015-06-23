@@ -170,7 +170,7 @@ main(void){
     printf ("\"ABCD\", \"BCD\"  == 0.7 via (1,0) (2,1) (3,2) -- linear:");
     val = find_sol_linear("ABCD",4,"BCD",3,gap,delta, &t);
     assert( abs(val - gap) <err);
-    //assert ( solucao_eq(ref, t)); 
+    assert ( solucao_eq(ref, t)); 
     solucao_destroy(&t);
     printf (" ok\n");
 

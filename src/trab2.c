@@ -291,7 +291,7 @@ find_sol_linear_base(const char *origem, const size_t m,
 
       Caso m<=2 ou n<=2, será usado a procura quadratica.
     */
-    if (m<=2 || n<=2) 
+    if (m<=3 || n<=3) 
 	return find_sol_base(origem,m,
 			     destino,n,
 			     gap,penalidade,
@@ -375,7 +375,16 @@ find_sol_linear_base(const char *origem, const size_t m,
     size_t j=0;
     double min_val = INFINITY; 
 
-    for (int i =0; i<=m; i++){
+    /*
+
+      HBD
+
+      se M>n, pode existir i>N, mas isso invalida e gera segfault quando é
+      invocao o find_sol_linear_base na segunda medate com um valor de "N"
+      negativo.
+      
+     */
+    for (size_t i =0; i<=min(m,n); i++){
 	double val = corrente_metade1[i]+corrente_metade2[i];
 	if (val <=min_val) {
 	    min_val = val;
@@ -392,11 +401,14 @@ find_sol_linear_base(const char *origem, const size_t m,
 			 &sol_metade1);
     
     solucao_t *sol_metade2 =NULL;
-    
+
+    /*
+      A mesma linha e coluna é incluída em ambos casos.
+     */
     find_sol_linear_base(origem+(m/2),m-m/2,
-			 destino+j,n-j,
+			 destino+j-1,n-j+1,
 			 gap,penalidade,
-			 base_m+m/2, base_n+j,
+			 base_m+m/2, base_n+j-1,
 			 &sol_metade2);
 
     *sol_p = solucao_merge(sol_metade1,sol_metade2);
