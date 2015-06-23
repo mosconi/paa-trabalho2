@@ -1,12 +1,6 @@
 #include "trab2.h"
 
-/*
-  TODO:
-
-  - Trocar nomes alinhamento_()_custo para OPT_()
-  - Trocar nomes proc..._()_custo para find_sol_()
-
-*/
+// HBD
 
 bool print_memory_usage=false;
 
@@ -34,20 +28,20 @@ s_min(double list[]){
 
 
 double 
-alinhamento_quadratico_custo(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
+opt_quadratico(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
 
     double M[m+1][n+1];
 
-    double val = alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
+    double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
 
     return val;
 }
 
 double 
-alinhamento_quadratico_custo_matriz(const char *origem, const size_t m,
-				    const char* destino, const size_t n,
-				    const double gap, penalidade_fn penalidade,
-				    double M[m+1][n+1]){
+opt_quadratico_matriz(const char *origem, const size_t m,
+		      const char* destino, const size_t n,
+		      const double gap, penalidade_fn penalidade,
+		      double M[m+1][n+1]){
 
     
     for (int i=0; i<=m;i++){
@@ -71,16 +65,16 @@ alinhamento_quadratico_custo_matriz(const char *origem, const size_t m,
 
 
 double
-alinhamento_linear_custo(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
+opt_linear(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
     double corrente[m+1];
 
-    alinhamento_linear_custo_array(origem,m,destino,n,gap,penalidade,corrente);
+    opt_linear_array(origem,m,destino,n,gap,penalidade,corrente);
     
     return corrente[m];
 }
 
 double
-alinhamento_linear_custo_array(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade,double array[m+1]){
+opt_linear_array(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade,double array[m+1]){
     double corrente[m+1];
     double ultimo[m+1];
 
@@ -114,15 +108,15 @@ alinhamento_linear_custo_array(const char *origem, size_t m, const char*destino,
 
 
 
-solucao_t *
-procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade){
+double 
+find_sol_quadratico(const char *origem, const size_t m,
+		    const char*destino, const size_t n,
+		    const double gap, penalidade_fn penalidade,
+		    solucao_t **sol_p){
     double M[m+1][n+1];
 
-    double val = alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
-    /*
-    fprintf(stderr, "      minval : %f\n", val); 
-    */
-    if (val) {}
+    double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
+
     size_t i= m;  size_t j= n;
 
     solucao_t *solucao=NULL;
@@ -137,24 +131,32 @@ procurar_solucao_quadratico(const char *origem, const size_t m, const char*desti
 	} else {
 	    /*  Erro!!!! */
 	    solucao_destroy(&solucao);
-	    return NULL;
+	    *sol_p = NULL;
+	    return 0.0;
 	}
     }
+    
     if(print_memory_usage)
 	printf("    memoria (current): %zu\n", getCurrentRSS() );
+
+    *sol_p = solucao;
     
-    return solucao;
+    return val ;
 
 }
 
-static solucao_t *
-procurar_solucao_base(const char *origem, const size_t m,
-		      const char*destino, const size_t n,
-		      const double gap, penalidade_fn penalidade,
-		      size_t base_m,size_t base_n ){
+static double
+find_sol_base(const char *origem, const size_t m,
+	      const char*destino, const size_t n,
+	      const double gap, penalidade_fn penalidade,
+	      size_t base_m,size_t base_n,
+	      solucao_t **sol_p ){
+    
     double M[m+1][n+1];
 
-    alinhamento_quadratico_custo_matriz(origem, m,  destino, n, gap, penalidade,M);
+    double opt_val = opt_quadratico_matriz(origem, m,
+					   destino, n,
+					   gap, penalidade, M);
 
     size_t i= m;  size_t j= n;
 
@@ -170,11 +172,14 @@ procurar_solucao_base(const char *origem, const size_t m,
 	} else {
 	    /*  Erro!!!! */
 	    solucao_destroy(&solucao);
-	    return NULL;
+	    *sol_p = NULL;
+	    return 0;
 	}
     }
+
+    *sol_p = solucao;
     
-    return solucao;
+    return opt_val;
 
 }
 
@@ -230,6 +235,12 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
     solucao_t *p1=s1;
     solucao_t *p2=s2;
 
+    if (!s1 && !s2)
+	return true;
+
+    if (!s1 || !s2)
+	return false;
+
     while (p1 || p2) {
 
 	if ((p1->pos_A != p2->pos_A) ||
@@ -256,20 +267,25 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
 
   retorna a união (concat) das duas.
 
- */
-static solucao_t *
-procurar_solucao_linear_base(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, size_t base_m,size_t base_n ){
+*/
+static double
+find_sol_linear_base(const char *origem, const size_t m,
+		     const char*destino, const size_t n,
+		     const double gap, penalidade_fn penalidade,
+		     size_t base_m,size_t base_n ,
+		     solucao_t **sol_p){
 
     /*
       para valores pequenos de m ou n, o consumo de memória é similar.
 
       Caso m<=2 ou n<=2, será usado a procura quadratica.
-     */
+    */
     if (m<=2 || n<=2) 
-	return procurar_solucao_base(origem,m,
-				     destino,n,
-				     gap,penalidade,
-				     base_m,base_n);
+	return find_sol_base(origem,m,
+			     destino,n,
+			     gap,penalidade,
+			     base_m,base_n,
+			     sol_p);
     
 
 
@@ -332,40 +348,52 @@ procurar_solucao_linear_base(const char *origem, const size_t m, const char*dest
 	}
 	    
     }
-    /*
-    fprintf(stderr, "     min_val: %f\n",min_val);
-    fprintf(stderr, "   string1 : <%.*s>\n",(int)m,origem);
-    fprintf(stderr, "   string1 : <%.*s><%.*s>\n",
-	    (int)m/2, origem,
-	    (int)(m-m/2), origem+m/2 );
-    */
-    solucao_t *sol_metade1 = procurar_solucao_linear_base(origem,m/2,
-							  destino,j,
-							  gap,penalidade,
-							  base_m, base_n);
-    solucao_t *sol_metade2 = procurar_solucao_linear_base(origem+(m/2),m-m/2,
-							  destino+j,n-j,
-							  gap,penalidade,
-							  base_m+m/2, base_n+j);
 
-    solucao_t * sol = solucao_merge(sol_metade1,sol_metade2);
+    solucao_t *sol_metade1 = NULL;
+    find_sol_linear_base(origem,m/2,
+			 destino,j,
+			 gap,penalidade,
+			 base_m, base_n,
+			 &sol_metade1);
+    
+    solucao_t *sol_metade2 =NULL;
+    
+    find_sol_linear_base(origem+(m/2),m-m/2,
+			 destino+j,n-j,
+			 gap,penalidade,
+			 base_m+m/2, base_n+j,
+			 &sol_metade2);
+
+    *sol_p = solucao_merge(sol_metade1,sol_metade2);
     
 
     
-    return sol;
+    return min_val;
 }
 
-
-solucao_t *
-procurar_solucao_linear(const char *origem, const size_t m,
-			const char*destino, const size_t n,
-			const double gap, penalidade_fn penalidade) {
-    
-    return procurar_solucao_linear_base(origem,m,destino,n,gap,penalidade,0,0);
-}
 
 double
-alinhamento_linear_custo2(const char *origem, size_t m, const char*destino, size_t n, double gap, penalidade_fn penalidade){
+find_sol_linear(const char *origem, const size_t m,
+		const char*destino, const size_t n,
+		const double gap, penalidade_fn penalidade,
+		solucao_t **sol_p) {
+    
+    return find_sol_linear_base(origem,m,destino,n,gap,penalidade,0,0,sol_p);
+}
+
+/*
+  Algoritmo baseado em 
+  http://par.cse.nsysu.edu.tw/~wuys/Hirschberg%20Algorithm%20C(Divide%20and%20Conquer,%201975).html
+
+  Este algoritmo computa o melhor caminho de (0,0) até a linha N/2 e de (m,n) até a linha N/2. Em 
+  sequida localiza a coluna 0 <= k <= M que minimiza a solução.
+
+*/
+
+double
+opt_linear2(const char *origem, size_t m,
+	    const char*destino, size_t n,
+	    double gap, penalidade_fn penalidade){
 
     double ultimo_metade1[m+1];
     double corrente_metade1[m+1];

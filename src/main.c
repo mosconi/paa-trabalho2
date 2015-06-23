@@ -16,6 +16,8 @@ extern char *__progname;
 
 double gap = 0.7;
 
+double err = 0.001;
+
 double
 delta(char A, char B) {
     if (A == B)
@@ -72,7 +74,7 @@ generate (size_t size) {
 
 struct thr_args {
     char *name;
-    alinhamento_fn funcao;
+    opt_fn funcao;
     char *string1;
     char *string2;
     double gap;
@@ -89,10 +91,12 @@ pthread_wrapper(void *data) {
     
     pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
 
-    solucao_t *t = args->funcao(strarg(args->string1),
-				strarg(args->string2),
-				args->gap, args->delta
-				);
+    solucao_t *t = NULL;
+    args->funcao(strarg(args->string1),
+		 strarg(args->string2),
+		 args->gap, args->delta,
+		 &t
+		 );
     solucao_destroy(&t);
 
     pthread_cond_signal(&done);
@@ -184,9 +188,12 @@ tarefa2a(int argc, char **argv){
 	    char *string2 = generate(sz);
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
-	    solucao_t *t_q = procurar_solucao_quadratico(strarg(string1),
-						       strarg(string2),
-						       gap,delta);
+	    solucao_t *solucao_quadratico = NULL;
+	    double opt_quadratico =
+		find_sol_quadratico(strarg(string1),
+				    strarg(string2),
+				    gap,delta,
+				    &solucao_quadratico);
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 
 	    
@@ -198,9 +205,13 @@ tarefa2a(int argc, char **argv){
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
 	    
-	    solucao_t *t_l = procurar_solucao_linear(strarg(string1),
-						     strarg(string2),
-						     gap,delta);
+	    solucao_t *solucao_linear = NULL;
+	    double opt_linear =
+		find_sol_linear(strarg(string1),
+				strarg(string2),
+				gap,delta,
+				&solucao_linear
+				);
 	    
 	    clock_gettime(CLOCK_REALTIME, &tqf);
 	    double elaps_l = difftime(tqf.tv_sec, tqi.tv_sec);
@@ -208,16 +219,16 @@ tarefa2a(int argc, char **argv){
 	    elaps_l  +=  ((double)elaps_ns) / 1.0e9;
 
 	    printf("  linear    : tempo = %f\n", elaps_l );
-	    printf("    eq      : %s\n", solucao_eq(t_q, t_l)?"sim":"nao");
+	    printf("    eq      : %s\n", abs(opt_linear - opt_quadratico)<err?"sim":"nao");
 
 	    if (i==1) {
 		printf("string1: %s\n", string1);
 		printf("string2: %s\n", string2);
-		solucao_print(t_q);
-		solucao_print(t_l);
+		solucao_print(solucao_quadratico);
+		solucao_print(solucao_linear);
 	    }
-	    solucao_destroy(&t_q);
-	    solucao_destroy(&t_l);
+	    solucao_destroy(&solucao_quadratico);
+	    solucao_destroy(&solucao_linear);
 	    printf("  memoria (Peek): %zu\n", getPeakRSS());
 	    
 	}
@@ -295,12 +306,12 @@ tarefa2b(int argc, char **argv){
 	
 	if (run_linear) {
 	    args.name = "linear";
-	    args.funcao = procurar_solucao_linear;
+	    args.funcao = find_sol_linear;
 	    run_linear = do_or_timeout(&max_wait, &args);
 	}
 	if (run_quad) {
 	    args.name = "quadratico";
-	    args.funcao = procurar_solucao_linear;
+	    args.funcao = find_sol_linear;
 	    run_quad = do_or_timeout(&max_wait, &args);
 	
 	}

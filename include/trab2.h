@@ -78,30 +78,33 @@ solucao_t *
 solucao_merge(solucao_t*, solucao_t*);
 
 double 
-alinhamento_quadratico_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+opt_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
 double 
-alinhamento_quadratico_custo_matriz(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,
+opt_quadratico_matriz(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,
 				    double M[m+1][n+1]);
 
-solucao_t *
-procurar_solucao_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+double
+find_sol_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, solucao_t **);
 
-solucao_t *
-procurar_solucao_linear(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+double 
+find_sol_linear(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, solucao_t **);
 
 
 double
-alinhamento_linear_custo(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+opt_linear(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
 double
-alinhamento_linear_custo2(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
+opt_linear2(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
 
 double
-alinhamento_linear_custo_array(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,double array[m+1]);
+opt_linear_array(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,double array[m+1]);
 
-typedef solucao_t *
-(*alinhamento_fn)(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade) ;
+typedef double
+(*opt_fn)(const char *origem, const size_t m,
+	  const char*destino, const size_t n,
+	  const double gap, penalidade_fn penalidade,
+	  solucao_t **) ;
 
 #endif
