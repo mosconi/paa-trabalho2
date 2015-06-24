@@ -33,9 +33,19 @@ s_min(double list[]){
 double 
 opt_quadratico(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
 
-    double M[m+1][n+1];
+    //    double M[m+1][n+1];
+    double **M=calloc(sizeof(double *),m+1);
+    for (size_t i=0; i<=m; i++){
+	M[i]=calloc(sizeof(double),n+1);
+    }
 
     double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
+
+    for (size_t i =0; i<=m; i++) {
+	free(M[i]);
+    }
+
+    free(M);
 
     return val;
 }
@@ -44,7 +54,7 @@ double
 opt_quadratico_matriz(const char *origem, const size_t m,
 		      const char* destino, const size_t n,
 		      const double gap, penalidade_fn penalidade,
-		      double M[m+1][n+1]){
+		      double **M){
 
     
     for (int i=0; i<=m;i++){
@@ -120,8 +130,15 @@ find_sol_quadratico(const char *origem, const size_t m,
 		    const char*destino, const size_t n,
 		    const double gap, penalidade_fn penalidade,
 		    solucao_t **sol_p){
-    double M[m+1][n+1];
+    double **M;
+    
+    M=calloc(sizeof(double*),(m+1));
 
+    if(!M) return NAN;
+    
+    for (size_t i = 0 ; i<=m; i++){
+	M[i] = calloc(sizeof(double),(n+1));
+    }
     double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
 
     size_t i= m;  size_t j= n;
@@ -148,6 +165,12 @@ find_sol_quadratico(const char *origem, const size_t m,
 
     *sol_p = solucao;
     
+    for (size_t i =0; i<=m; i++) {
+	free(M[i]);
+    }
+
+    free(M);
+
     return val ;
 
 }
@@ -159,7 +182,11 @@ find_sol_base(const char *origem, const size_t m,
 	      size_t base_m,size_t base_n,
 	      solucao_t **sol_p ){
     
-    double M[m+1][n+1];
+    double **M;
+    M=calloc(sizeof(double *),m+1);
+    for (size_t i =0; i<=m; i++) {
+	M[i]=calloc(sizeof(double),(n+1));
+    }
 
     double opt_val = opt_quadratico_matriz(origem, m,
 					   destino, n,
@@ -185,6 +212,12 @@ find_sol_base(const char *origem, const size_t m,
     }
 
     *sol_p = solucao;
+
+    for (size_t i =0; i<=m; i++) {
+	free(M[i]);
+    }
+
+    free(M);
     
     return opt_val;
 

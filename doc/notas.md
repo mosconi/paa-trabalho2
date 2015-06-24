@@ -1,1 +1,3 @@
-#
+# Notas sobre a implementação
+
+## 

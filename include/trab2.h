@@ -81,8 +81,10 @@ double
 opt_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade);
 
 double 
-opt_quadratico_matriz(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,
-				    double M[m+1][n+1]);
+opt_quadratico_matriz(const char *origem, const size_t m,
+		      const char*destino, const size_t n,
+		      const double gap, penalidade_fn penalidade,
+		      double **M);
 
 double
 find_sol_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, solucao_t **);
