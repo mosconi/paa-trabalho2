@@ -84,7 +84,7 @@ double
 opt_quadratico_matriz(const char *origem, const size_t m,
 		      const char*destino, const size_t n,
 		      const double gap, penalidade_fn penalidade,
-		      double **M);
+		      double *M);
 
 double
 find_sol_quadratico(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade, solucao_t **);
@@ -101,7 +101,7 @@ opt_linear2(const char *origem, const size_t m, const char*destino, const size_t
 
 
 double
-opt_linear_array(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,double array[m+1]);
+opt_linear_array(const char *origem, const size_t m, const char*destino, const size_t n, const double gap, penalidade_fn penalidade,double *array);
 
 typedef double
 (*opt_fn)(const char *origem, const size_t m,

@@ -119,7 +119,6 @@ main(void){
 	return ++test;
     }
     printf("ok\n");
-        printf ("new(1,1,t): ");
     t = solucao_new(1,1,t);
     if (!t) {
 	printf ("nok\n");
@@ -130,7 +129,7 @@ main(void){
     solucao_print(t);
     solucao_destroy(&t);
 
-    printf ("\testes de find_sol\n");
+    printf ("\ttestes de find_sol\n");
 
     solucao_t *ref = NULL;
     ref = solucao_new(3,3, ref);

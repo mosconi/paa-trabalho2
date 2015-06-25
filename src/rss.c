@@ -1,5 +1,10 @@
 #include "trab2.h"
 
+/* 
+   Código de:
+
+   http://stackoverflow.com/questions/669438/how-to-get-memory-usage-at-run-time-in-c
+*/
 
 /**
  * Returns the peak (maximum so far) resident set size (physical

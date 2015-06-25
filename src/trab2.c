@@ -29,21 +29,20 @@ s_min(double list[]){
 #define min(...) s_min((double []){__VA_ARGS__,NAN})
 
 
+// macro para mapear um ponto de matriz em um vetor linear
+#define m2a(M,m,n,i,j) M[(n+1)*(i) + (j)]
 
 double 
 opt_quadratico(const char *origem, const size_t m, const char* destino, const size_t n, const double gap, penalidade_fn penalidade){
 
     //    double M[m+1][n+1];
-    double **M=calloc(sizeof(double *),m+1);
-    for (size_t i=0; i<=m; i++){
-	M[i]=calloc(sizeof(double),n+1);
-    }
+    double *M=malloc (sizeof (double) * (m+1) * (n+1) );
+
+    // alocacao de memoria falhot
+    if (!M)
+	return NAN;
 
     double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
-
-    for (size_t i =0; i<=m; i++) {
-	free(M[i]);
-    }
 
     free(M);
 
@@ -54,26 +53,28 @@ double
 opt_quadratico_matriz(const char *origem, const size_t m,
 		      const char* destino, const size_t n,
 		      const double gap, penalidade_fn penalidade,
-		      double **M){
+		      double *M){
 
     
     for (int i=0; i<=m;i++){
-	M[i][0]= i*gap;
+	m2a(M,m,n,i,0)= i*gap;
     }
     for (int j=0; j<=n;j++){
-	M[0][j]= j*gap;
+	m2a(M,m,n,0,j)= j*gap;
     }
 
     for (int i=1; i<=m; i++) {
 	for (int j=1; j<=n;j++){
-	    double val1=penalidade(origem[i-1],destino[j-1]) + M[i-1][j-1];
-	    double val2=gap + M[i-1][j];
-	    double val3=gap + M[i][j-1];
+	    double val1=penalidade(origem[i-1],destino[j-1]) + m2a(M,m,n,i-1,j-1);
+	    double val2=gap +  m2a(M,m,n,i-1,j);
+	    double val3=gap +  m2a(M,m,n,i,j-1);
 
-	    M[i][j] = min(val1,val2,val3);
+	    m2a(M,m,n,i,j) = min(val1,val2,val3);
 	}
     }
-    return M[m][n];
+    double min_val = m2a(M,m,n,m,n);
+    
+    return min_val;
 }
 
 
@@ -130,15 +131,12 @@ find_sol_quadratico(const char *origem, const size_t m,
 		    const char*destino, const size_t n,
 		    const double gap, penalidade_fn penalidade,
 		    solucao_t **sol_p){
-    double **M;
     
-    M=calloc(sizeof(double*),(m+1));
+    double *M=malloc (sizeof (double) * (m+1) * (n+1) );
 
-    if(!M) return NAN;
-    
-    for (size_t i = 0 ; i<=m; i++){
-	M[i] = calloc(sizeof(double),(n+1));
-    }
+    if(!M)
+	return NAN;
+
     double val = opt_quadratico_matriz(origem, m,  destino, n, gap, penalidade,M);
 
     size_t i= m;  size_t j= n;
@@ -146,17 +144,18 @@ find_sol_quadratico(const char *origem, const size_t m,
     solucao_t *solucao=NULL;
 
     while (i && j) {
-	if (M[i][j] == penalidade(origem[i-1],destino[j-1]) + M[i-1][j-1]) {
+	if (m2a(M,m,n,i,j) == penalidade(origem[i-1],destino[j-1]) + m2a(M,m,n,i-1,j-1)) {
 	    solucao = solucao_new(--i,--j,solucao);
-	} else if (M[i][j] == gap + M[i-1][j]) {
+	} else if (m2a(M,m,n,i,j) == gap + m2a(M,m,n,i-1,j)) {
 	    i--;
-	} else if (M[i][j] == gap + M[i][j-1]) {
+	} else if (m2a(M,m,n,i,j) == gap + m2a(M,m,n,i,j-1)) {
 	    j--;
 	} else {
 	    /*  Erro!!!! */
+	    free(M);
 	    solucao_destroy(&solucao);
 	    *sol_p = NULL;
-	    return 0.0;
+	    return NAN;
 	}
     }
     
@@ -165,10 +164,6 @@ find_sol_quadratico(const char *origem, const size_t m,
 
     *sol_p = solucao;
     
-    for (size_t i =0; i<=m; i++) {
-	free(M[i]);
-    }
-
     free(M);
 
     return val ;
@@ -181,41 +176,37 @@ find_sol_base(const char *origem, const size_t m,
 	      const double gap, penalidade_fn penalidade,
 	      size_t base_m,size_t base_n,
 	      solucao_t **sol_p ){
-    
-    double **M;
-    M=calloc(sizeof(double *),m+1);
-    for (size_t i =0; i<=m; i++) {
-	M[i]=calloc(sizeof(double),(n+1));
-    }
+
+    double *M=malloc (sizeof (double) * (m+1) * (n+1) );
+
 
     double opt_val = opt_quadratico_matriz(origem, m,
 					   destino, n,
-					   gap, penalidade, M);
+					   gap, penalidade,
+					   M);
 
     size_t i= m;  size_t j= n;
 
     solucao_t *solucao=NULL;
 
     while (i && j) {
-	if (M[i][j] == penalidade(origem[i-1],destino[j-1]) + M[i-1][j-1]) {
-	    solucao = solucao_new(--i+base_m,--j+base_n,solucao);
-	} else if (M[i][j] == gap + M[i-1][j]) {
+	if (m2a(M,m,n,i,j) == penalidade(origem[i-1],destino[j-1]) + m2a(M,m,n,i-1,j-1)) {
+	    solucao = solucao_new(--i + base_m, --j + base_n ,solucao);
+	} else if (m2a(M,m,n,i,j) == gap + m2a(M,m,n,i-1,j)) {
 	    i--;
-	} else if (M[i][j] == gap + M[i][j-1]) {
+	} else if (m2a(M,m,n,i,j) == gap + m2a(M,m,n,i,j-1)) {
 	    j--;
 	} else {
 	    /*  Erro!!!! */
 	    solucao_destroy(&solucao);
 	    *sol_p = NULL;
-	    return 0;
+	    free(M);
+	    return NAN;
 	}
+
     }
 
     *sol_p = solucao;
-
-    for (size_t i =0; i<=m; i++) {
-	free(M[i]);
-    }
 
     free(M);
     
@@ -324,12 +315,13 @@ find_sol_linear_base(const char *origem, const size_t m,
 
       Caso m<=2 ou n<=2, será usado a procura quadratica.
     */
-    if (m<=3 || n<=3) 
+    if (m<=3 || n<=3) {
 	return find_sol_base(origem,m,
 			     destino,n,
 			     gap,penalidade,
 			     base_m,base_n,
 			     sol_p);
+    }
     
     /* 
        vetores que armazanearam a lista corremte e última de cada metada.
@@ -338,10 +330,24 @@ find_sol_linear_base(const char *origem, const size_t m,
 
      */
 
-    double ultimo_metade1[m+1];
-    double corrente_metade1[m+1];
-    double ultimo_metade2[m+1];
-    double corrente_metade2[m+1];
+    double *ultimo_metade1=malloc(sizeof(double)*(m+1));
+    double *corrente_metade1=malloc(sizeof(double)*(m+1));
+    double *ultimo_metade2=malloc(sizeof(double)*(m+1));
+    double *corrente_metade2=malloc(sizeof(double)*(m+1));
+
+    if (!ultimo_metade1 ||
+	!ultimo_metade2 ||
+	!corrente_metade1 ||
+	!corrente_metade2)
+	goto ERROR;
+
+    // salva a solimprimindo uso de memória
+
+    bool save_print = print_memory_usage;
+    if (save_print)
+	print_memory_usage = false;
+
+
 
     // inicializando o primeiro correte com gaps somente.
     for (int i=0; i<=m; i++){
@@ -352,9 +358,10 @@ find_sol_linear_base(const char *origem, const size_t m,
     /*
       calculando a primeira metade: "linhas" 0-> N/2
      */
-    for (long j=1; j<=(long)n/2; j++) {	
-	for (long i=0; i<=m; i++)
-	    ultimo_metade1[i] = corrente_metade1[i];
+    for (long j=1; j<=(long)n/2; j++) {
+	double *t = ultimo_metade1;
+	ultimo_metade1 = corrente_metade1;
+	corrente_metade1 = t;
 	
 	corrente_metade1[0] = j*gap;
 
@@ -383,8 +390,10 @@ find_sol_linear_base(const char *origem, const size_t m,
     */
 
     for(long j=n-1; j>=(long)n/2;j--) {
-	for (long i=0; i<=m; i++)
-	    ultimo_metade2[i] = corrente_metade2[i];
+	double *t = ultimo_metade2;
+	ultimo_metade2 = corrente_metade2;
+	corrente_metade2 = t;
+
 	
 	corrente_metade2[m] = (n-j)*gap;
 	for (long i=m-1; i>=0; i--){
@@ -401,6 +410,15 @@ find_sol_linear_base(const char *origem, const size_t m,
 
     }
 
+    	    
+    if(!base_m && !base_n && save_print) {
+	printf("    memoria (current): %zu\n", getCurrentRSS() );
+    }
+
+
+    // liberando espaco das linhas "utlimo_*"
+    free(ultimo_metade1);
+    free(ultimo_metade2);
 
     /*
       Localizando a coluna 
@@ -425,6 +443,21 @@ find_sol_linear_base(const char *origem, const size_t m,
 	}
 	    
     }
+    free(corrente_metade1);
+    free(corrente_metade2);
+
+    solucao_t *sol_metade2 =NULL;
+    find_sol_linear_base(origem+(m/2),m-m/2,
+			 destino+j-1,n-j+1,
+			 gap,penalidade,
+			 base_m+m/2, base_n+j-1,
+			 &sol_metade2);
+
+    /*
+      A mesma linha e coluna é incluída em ambos casos.
+     */
+
+
 
     solucao_t *sol_metade1 = NULL;
     find_sol_linear_base(origem,m/2,
@@ -433,22 +466,23 @@ find_sol_linear_base(const char *origem, const size_t m,
 			 base_m, base_n,
 			 &sol_metade1);
     
-    solucao_t *sol_metade2 =NULL;
-
-    /*
-      A mesma linha e coluna é incluída em ambos casos.
-     */
-    find_sol_linear_base(origem+(m/2),m-m/2,
-			 destino+j-1,n-j+1,
-			 gap,penalidade,
-			 base_m+m/2, base_n+j-1,
-			 &sol_metade2);
-
     *sol_p = solucao_merge(sol_metade1,sol_metade2);
-    
 
+    print_memory_usage = save_print;
     
     return min_val;
+ ERROR:
+    if (ultimo_metade1)
+	free (ultimo_metade1);
+    if (ultimo_metade2)
+	free (ultimo_metade2);
+    if (corrente_metade1)
+	free (corrente_metade1);
+    if (corrente_metade2)
+	free (corrente_metade2);
+
+    return NAN;
+
 }
 
 /*

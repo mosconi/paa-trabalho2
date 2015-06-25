@@ -10,7 +10,7 @@ pthread_cond_t done = PTHREAD_COND_INITIALIZER;
 
 #define strarg(s) s, strlen(s)
 
-static const char *VALID_CHARS="ABCN";
+static const char *VALID_CHARS="ABCD";
 
 extern char *__progname;
 
@@ -24,8 +24,6 @@ delta(char A, char B) {
 	return 0;
     return 1.0;
 };
-
-
 
 static void
 usage(void){
@@ -56,14 +54,14 @@ ipow (size_t base, size_t i) {
 static char *
 generate (size_t size) {
     assert(size >0);
-    char *str = calloc(size+1,2);
+    char *str = calloc(sizeof(char) , (size+1));
 
     if (!str)
 	goto ERROR;
     
     size_t l = strlen(VALID_CHARS);
 
-    for (long long i = 0; i<size; i++) {
+    for (size_t i = 0; i<size; i++) {
 	str[i] = VALID_CHARS[rand()%l];
     }
     return str;
@@ -92,12 +90,15 @@ pthread_wrapper(void *data) {
     pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
 
     solucao_t *t = NULL;
-    args->funcao(strarg(args->string1),
-		 strarg(args->string2),
-		 args->gap, args->delta,
-		 &t
-		 );
+    double val = args->funcao(strarg(args->string1),
+			      strarg(args->string2),
+			      args->gap, args->delta,
+			      &t
+			      );
     solucao_destroy(&t);
+
+    if ( isnan(val) )
+	printf("%s: find_sol falhou (NAN)\n", args->name);
 
     pthread_cond_signal(&done);
     return NULL;
@@ -134,10 +135,13 @@ do_or_timeout(struct timespec *max_wait, struct thr_args *args) {
     if (err == ETIMEDOUT) {
 	printf( "%s: calculation timed out\n", args->name);
 	rc = false;
+	pthread_mutex_unlock(&calculating);
+	return rc;
     }
 
     if (!err)
 	pthread_mutex_unlock(&calculating);
+    
     double elaps_s = difftime(tsf.tv_sec, tsi.tv_sec);
     long elaps_ns = tsf.tv_nsec - tsi.tv_nsec;
     elaps_s  +=  ((double)elaps_ns) / 1.0e9; 
@@ -158,8 +162,16 @@ tarefa2a(int argc, char **argv){
     int j_start =1 ;
     int j_stop = 10;
 
-    while ((opt=getopt(argc,argv,"i:b:e:")) != -1) {
+    bool print_strings = false;
+    bool print_paths = false;
+    
+    while ((opt=getopt(argc,argv,"i:b:e:vp")) != -1) {
 	switch (opt) {
+	case 'p':
+	    print_paths = true;
+	case 'v':
+	    print_strings = true;
+	    break;
 	case 'i':
 	    run_i = atoi(optarg);
 	    break;
@@ -167,7 +179,7 @@ tarefa2a(int argc, char **argv){
 	    j_start = atoi(optarg);
 	    break;
 	case 'e':
-	    j_start = atoi(optarg);
+	    j_stop = atoi(optarg);
 	    break;
 	default: // '?'
 	    usage();
@@ -183,7 +195,7 @@ tarefa2a(int argc, char **argv){
 	for (int j = j_start; j<=j_stop; j++) {
 
 	    size_t sz = 10 * ipow (2,i);
-	    printf ("i= %d, j=%d, size = %zu...\n", i, j, sz);
+	    printf ("\ni= %d, j=%d, size = %zu...\n", i, j, sz);
 	    char *string1 = generate(sz);
 	    char *string2 = generate(sz);
 
@@ -200,7 +212,10 @@ tarefa2a(int argc, char **argv){
 	    double elaps_q = difftime(tqf.tv_sec, tqi.tv_sec);
 	    long elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
 	    elaps_q  +=  ((double)elaps_ns) / 1.0e9;
+	    if (isnan (opt_quadratico))
+		printf("    find_sol falhou\n");
 	    printf("  quadratico: tempo = %f\n", elaps_q );
+	    
 
 
 	    clock_gettime(CLOCK_REALTIME, &tqi);
@@ -217,18 +232,40 @@ tarefa2a(int argc, char **argv){
 	    double elaps_l = difftime(tqf.tv_sec, tqi.tv_sec);
 	    elaps_ns = tqf.tv_nsec - tqi.tv_nsec;
 	    elaps_l  +=  ((double)elaps_ns) / 1.0e9;
+	    
+	    if (isnan (opt_linear))
+		printf("    find_sol falhou\n");
 
 	    printf("  linear    : tempo = %f\n", elaps_l );
-	    printf("    eq      : %s\n", abs(opt_linear - opt_quadratico)<err?"sim":"nao");
 
-	    if (i==1) {
-		printf("string1: %s\n", string1);
-		printf("string2: %s\n", string2);
-		solucao_print(solucao_quadratico);
-		solucao_print(solucao_linear);
+	    
+	    if (!isnan(opt_linear) && !isnan(opt_quadratico))
+		printf("    eq                 : %s\n", abs(opt_linear - opt_quadratico)<err?"sim":"nao");
+		
+	    printf("    caminhos eq        : %s\n", solucao_eq(solucao_linear, solucao_quadratico)?"sim":"nao");
+
+	    // imprime as strings e caminhos, print condicional
+	    if (print_strings) {
+		printf("--------------------------------\n");
+		printf("      string1       : %s\n", string1);
+		printf("      string2       : %s\n", string2);
+		printf("--------------------------------\n");
 	    }
+	    if (print_paths) {
+		printf("--------------------------------\n");
+		printf("      caminho quad  : ");
+		solucao_print(solucao_quadratico);
+		printf("      caminho linear: ");
+		solucao_print(solucao_linear);
+		printf("--------------------------------\n");
+	    }
+
+	    // clean up 
 	    solucao_destroy(&solucao_quadratico);
 	    solucao_destroy(&solucao_linear);
+	    free(string1);
+	    free(string2);
+
 	    printf("  memoria (Peek): %zu\n", getPeakRSS());
 	    
 	}
@@ -311,7 +348,7 @@ tarefa2b(int argc, char **argv){
 	}
 	if (run_quad) {
 	    args.name = "quadratico";
-	    args.funcao = find_sol_linear;
+	    args.funcao = find_sol_quadratico;
 	    run_quad = do_or_timeout(&max_wait, &args);
 	
 	}
