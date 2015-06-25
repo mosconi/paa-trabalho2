@@ -1,0 +1,1250 @@
+
+i= 1, j=1, size = 20...
+    memoria (current): 700416
+  quadratico: tempo = 0.000151
+    memoria (current): 757760
+  linear    : tempo = 0.000121
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=2, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000073
+    memoria (current): 757760
+  linear    : tempo = 0.000117
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=3, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000070
+    memoria (current): 757760
+  linear    : tempo = 0.000109
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=4, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000070
+    memoria (current): 757760
+  linear    : tempo = 0.000107
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=5, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000066
+    memoria (current): 757760
+  linear    : tempo = 0.000106
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=6, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000071
+    memoria (current): 757760
+  linear    : tempo = 0.000108
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=7, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000069
+    memoria (current): 757760
+  linear    : tempo = 0.000103
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=8, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000069
+    memoria (current): 757760
+  linear    : tempo = 0.000103
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=9, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000068
+    memoria (current): 757760
+  linear    : tempo = 0.000106
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 1, j=10, size = 20...
+    memoria (current): 757760
+  quadratico: tempo = 0.000068
+    memoria (current): 757760
+  linear    : tempo = 0.000106
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=1, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000188
+    memoria (current): 765952
+  linear    : tempo = 0.000330
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=2, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000181
+    memoria (current): 765952
+  linear    : tempo = 0.000314
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=3, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000184
+    memoria (current): 765952
+  linear    : tempo = 0.000336
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=4, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000183
+    memoria (current): 765952
+  linear    : tempo = 0.000323
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=5, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000181
+    memoria (current): 765952
+  linear    : tempo = 0.000330
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=6, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000186
+    memoria (current): 765952
+  linear    : tempo = 0.000324
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=7, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000181
+    memoria (current): 765952
+  linear    : tempo = 0.000331
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=8, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000180
+    memoria (current): 765952
+  linear    : tempo = 0.000323
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=9, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000189
+    memoria (current): 765952
+  linear    : tempo = 0.000328
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 2, j=10, size = 40...
+    memoria (current): 765952
+  quadratico: tempo = 0.000182
+    memoria (current): 765952
+  linear    : tempo = 0.000318
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 806912
+
+i= 3, j=1, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000671
+    memoria (current): 806912
+  linear    : tempo = 0.001146
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=2, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000638
+    memoria (current): 806912
+  linear    : tempo = 0.001137
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=3, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000641
+    memoria (current): 806912
+  linear    : tempo = 0.001141
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=4, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000627
+    memoria (current): 806912
+  linear    : tempo = 0.001144
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=5, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000618
+    memoria (current): 806912
+  linear    : tempo = 0.001142
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=6, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000635
+    memoria (current): 806912
+  linear    : tempo = 0.001144
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=7, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000628
+    memoria (current): 806912
+  linear    : tempo = 0.001144
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=8, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000634
+    memoria (current): 806912
+  linear    : tempo = 0.001136
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=9, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000626
+    memoria (current): 806912
+  linear    : tempo = 0.001123
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 3, j=10, size = 80...
+    memoria (current): 806912
+  quadratico: tempo = 0.000634
+    memoria (current): 806912
+  linear    : tempo = 0.001137
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 811008
+
+i= 4, j=1, size = 160...
+    memoria (current): 1015808
+  quadratico: tempo = 0.002542
+    memoria (current): 806912
+  linear    : tempo = 0.004310
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=2, size = 160...
+    memoria (current): 962560
+  quadratico: tempo = 0.002482
+    memoria (current): 962560
+  linear    : tempo = 0.004284
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=3, size = 160...
+    memoria (current): 962560
+  quadratico: tempo = 0.002390
+    memoria (current): 962560
+  linear    : tempo = 0.004258
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=4, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002399
+    memoria (current): 966656
+  linear    : tempo = 0.004281
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=5, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002387
+    memoria (current): 966656
+  linear    : tempo = 0.004266
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=6, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002388
+    memoria (current): 966656
+  linear    : tempo = 0.004300
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=7, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002385
+    memoria (current): 966656
+  linear    : tempo = 0.004290
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=8, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002391
+    memoria (current): 966656
+  linear    : tempo = 0.004299
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=9, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002386
+    memoria (current): 966656
+  linear    : tempo = 0.004293
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 4, j=10, size = 160...
+    memoria (current): 966656
+  quadratico: tempo = 0.002386
+    memoria (current): 966656
+  linear    : tempo = 0.004299
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1019904
+
+i= 5, j=1, size = 320...
+    memoria (current): 1794048
+  quadratico: tempo = 0.009936
+    memoria (current): 966656
+  linear    : tempo = 0.016569
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=2, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009675
+    memoria (current): 1585152
+  linear    : tempo = 0.016592
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=3, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009355
+    memoria (current): 1585152
+  linear    : tempo = 0.016635
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=4, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009275
+    memoria (current): 1585152
+  linear    : tempo = 0.016542
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=5, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009275
+    memoria (current): 1585152
+  linear    : tempo = 0.016605
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=6, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009350
+    memoria (current): 1585152
+  linear    : tempo = 0.016592
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=7, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009266
+    memoria (current): 1585152
+  linear    : tempo = 0.016524
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=8, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009305
+    memoria (current): 1585152
+  linear    : tempo = 0.016633
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=9, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009319
+    memoria (current): 1585152
+  linear    : tempo = 0.016559
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 5, j=10, size = 320...
+    memoria (current): 1585152
+  quadratico: tempo = 0.009320
+    memoria (current): 1585152
+  linear    : tempo = 0.016562
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 1798144
+
+i= 6, j=1, size = 640...
+    memoria (current): 4874240
+  quadratico: tempo = 0.039369
+    memoria (current): 1585152
+  linear    : tempo = 0.065003
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=2, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.038371
+    memoria (current): 4063232
+  linear    : tempo = 0.064820
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=3, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.036833
+    memoria (current): 4063232
+  linear    : tempo = 0.064937
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=4, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.036702
+    memoria (current): 4063232
+  linear    : tempo = 0.064925
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=5, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.029475
+    memoria (current): 4063232
+  linear    : tempo = 0.031144
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=6, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.017667
+    memoria (current): 4063232
+  linear    : tempo = 0.031199
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=7, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.017678
+    memoria (current): 4063232
+  linear    : tempo = 0.031094
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=8, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.017638
+    memoria (current): 4063232
+  linear    : tempo = 0.031134
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=9, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.017635
+    memoria (current): 4063232
+  linear    : tempo = 0.031124
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 6, j=10, size = 640...
+    memoria (current): 4063232
+  quadratico: tempo = 0.017636
+    memoria (current): 4063232
+  linear    : tempo = 0.031156
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 4878336
+
+i= 7, j=1, size = 1280...
+    memoria (current): 17195008
+  quadratico: tempo = 0.072441
+    memoria (current): 4063232
+  linear    : tempo = 0.123178
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=2, size = 1280...
+    memoria (current): 13918208
+  quadratico: tempo = 0.071384
+    memoria (current): 13918208
+  linear    : tempo = 0.123244
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=3, size = 1280...
+    memoria (current): 13918208
+  quadratico: tempo = 0.070236
+    memoria (current): 13918208
+  linear    : tempo = 0.122978
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=4, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070264
+    memoria (current): 13922304
+  linear    : tempo = 0.123204
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=5, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070266
+    memoria (current): 13922304
+  linear    : tempo = 0.125233
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=6, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070253
+    memoria (current): 13922304
+  linear    : tempo = 0.122963
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=7, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070327
+    memoria (current): 13922304
+  linear    : tempo = 0.123278
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=8, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070491
+    memoria (current): 13922304
+  linear    : tempo = 0.123088
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=9, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070300
+    memoria (current): 13922304
+  linear    : tempo = 0.123363
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 7, j=10, size = 1280...
+    memoria (current): 13922304
+  quadratico: tempo = 0.070369
+    memoria (current): 13922304
+  linear    : tempo = 0.123106
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 17199104
+
+i= 8, j=1, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.287056
+    memoria (current): 13922304
+  linear    : tempo = 0.489754
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=2, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286371
+    memoria (current): 13922304
+  linear    : tempo = 0.489665
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=3, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286447
+    memoria (current): 13922304
+  linear    : tempo = 0.489785
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=4, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286217
+    memoria (current): 13922304
+  linear    : tempo = 0.489194
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=5, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286608
+    memoria (current): 13922304
+  linear    : tempo = 0.489479
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=6, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286338
+    memoria (current): 13922304
+  linear    : tempo = 0.490009
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=7, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.287106
+    memoria (current): 13922304
+  linear    : tempo = 0.490524
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=8, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286556
+    memoria (current): 13922304
+  linear    : tempo = 0.489895
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=9, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286773
+    memoria (current): 13922304
+  linear    : tempo = 0.489793
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 8, j=10, size = 2560...
+    memoria (current): 66396160
+  quadratico: tempo = 0.286689
+    memoria (current): 13922304
+  linear    : tempo = 0.489438
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 66400256
+
+i= 9, j=1, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139504
+    memoria (current): 13922304
+  linear    : tempo = 1.949087
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=2, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139788
+    memoria (current): 13922304
+  linear    : tempo = 1.948044
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=3, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139824
+    memoria (current): 13922304
+  linear    : tempo = 1.948192
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=4, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139007
+    memoria (current): 13922304
+  linear    : tempo = 1.947800
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=5, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139689
+    memoria (current): 13922304
+  linear    : tempo = 1.947902
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=6, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139695
+    memoria (current): 13922304
+  linear    : tempo = 1.948480
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=7, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139053
+    memoria (current): 13922304
+  linear    : tempo = 1.949331
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=8, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.139301
+    memoria (current): 13922304
+  linear    : tempo = 1.948754
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=9, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.138971
+    memoria (current): 13922304
+  linear    : tempo = 1.948281
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 9, j=10, size = 5120...
+    memoria (current): 223723520
+  quadratico: tempo = 1.138795
+    memoria (current): 13922304
+  linear    : tempo = 1.947733
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 223727616
+
+i= 10, j=1, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.540553
+    memoria (current): 13922304
+  linear    : tempo = 7.763114
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=2, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.541476
+    memoria (current): 13922304
+  linear    : tempo = 7.760043
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=3, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.540537
+    memoria (current): 13922304
+  linear    : tempo = 7.761625
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=4, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.540397
+    memoria (current): 13922304
+  linear    : tempo = 7.759994
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=5, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.538845
+    memoria (current): 13922304
+  linear    : tempo = 7.765276
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=6, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.540393
+    memoria (current): 13922304
+  linear    : tempo = 7.764095
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=7, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.539674
+    memoria (current): 13922304
+  linear    : tempo = 7.761842
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=8, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.541092
+    memoria (current): 13922304
+  linear    : tempo = 7.762496
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=9, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.540761
+    memoria (current): 13922304
+  linear    : tempo = 7.761528
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 10, j=10, size = 10240...
+    memoria (current): 852951040
+  quadratico: tempo = 4.541527
+    memoria (current): 13922304
+  linear    : tempo = 7.762752
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 852955136
+
+i= 11, j=1, size = 20480...
+    memoria (current): 3369697280
+  quadratico: tempo = 18.125158
+    memoria (current): 13926400
+  linear    : tempo = 30.963332
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369701376
+
+i= 11, j=2, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.123904
+    memoria (current): 13926400
+  linear    : tempo = 30.969431
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=3, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.122086
+    memoria (current): 13926400
+  linear    : tempo = 30.968048
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=4, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.126108
+    memoria (current): 13926400
+  linear    : tempo = 30.972358
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=5, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.126147
+    memoria (current): 13926400
+  linear    : tempo = 30.968321
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=6, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.123291
+    memoria (current): 13926400
+  linear    : tempo = 30.972248
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=7, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.122561
+    memoria (current): 13926400
+  linear    : tempo = 30.965500
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=8, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.128460
+    memoria (current): 13926400
+  linear    : tempo = 30.965339
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=9, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.122871
+    memoria (current): 13926400
+  linear    : tempo = 30.962054
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 11, j=10, size = 20480...
+    memoria (current): 3369701376
+  quadratico: tempo = 18.128572
+    memoria (current): 13926400
+  linear    : tempo = 30.964180
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 3369705472
+
+i= 12, j=1, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.377729
+    memoria (current): 13926400
+  linear    : tempo = 123.601281
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=2, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.371030
+    memoria (current): 13926400
+  linear    : tempo = 123.590920
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=3, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.378829
+    memoria (current): 13926400
+  linear    : tempo = 123.615879
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=4, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.377249
+    memoria (current): 13926400
+  linear    : tempo = 123.595226
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=5, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.359395
+    memoria (current): 13926400
+  linear    : tempo = 123.592508
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=6, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.370772
+    memoria (current): 13926400
+  linear    : tempo = 123.591339
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=7, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.373397
+    memoria (current): 13926400
+  linear    : tempo = 123.615276
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=8, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.360901
+    memoria (current): 13926400
+  linear    : tempo = 123.607949
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=9, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.369440
+    memoria (current): 13926400
+  linear    : tempo = 123.607178
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 12, j=10, size = 40960...
+    memoria (current): 13436358656
+  quadratico: tempo = 72.374307
+    memoria (current): 13926400
+  linear    : tempo = 123.619808
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 13436362752
+
+i= 13, j=1, size = 81920...
+    memoria (current): 48449605632
+  quadratico: tempo = 323.088240
+    memoria (current): 6209536
+  linear    : tempo = 494.244806
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49587961856
+
+i= 13, j=2, size = 81920...
+    memoria (current): 48738705408
+  quadratico: tempo = 320.924373
+    memoria (current): 6213632
+  linear    : tempo = 494.710879
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49591472128
+
+i= 13, j=3, size = 81920...
+    memoria (current): 49423572992
+  quadratico: tempo = 315.448943
+    memoria (current): 5984256
+  linear    : tempo = 494.020967
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49598836736
+
+i= 13, j=4, size = 81920...
+    memoria (current): 49374470144
+  quadratico: tempo = 316.436848
+    memoria (current): 5840896
+  linear    : tempo = 494.266864
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49608876032
+
+i= 13, j=5, size = 81920...
+    memoria (current): 49459118080
+  quadratico: tempo = 333.306761
+    memoria (current): 5599232
+  linear    : tempo = 494.530821
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49612623872
+
+i= 13, j=6, size = 81920...
+    memoria (current): 48503324672
+  quadratico: tempo = 346.422696
+    memoria (current): 5607424
+  linear    : tempo = 493.888578
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49613221888
+
+i= 13, j=7, size = 81920...
+    memoria (current): 49241169920
+  quadratico: tempo = 315.067364
+    memoria (current): 5603328
+  linear    : tempo = 494.582788
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49613221888
+
+i= 13, j=8, size = 81920...
+    memoria (current): 48985362432
+  quadratico: tempo = 337.507594
+    memoria (current): 5599232
+  linear    : tempo = 494.833260
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 13, j=9, size = 81920...
+    memoria (current): 48806977536
+  quadratico: tempo = 326.489257
+    memoria (current): 5607424
+  linear    : tempo = 494.757081
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 13, j=10, size = 81920...
+    memoria (current): 48435445760
+  quadratico: tempo = 325.256446
+    memoria (current): 5599232
+  linear    : tempo = 494.335905
+    eq                 : sim
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=1, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000051
+    memoria (current): 10895360
+  linear    : tempo = 1973.170916
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=2, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.704294
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=3, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1973.028618
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=4, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.634364
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=5, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.779051
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=6, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.612740
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=7, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.512228
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=8, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.536445
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=9, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.713060
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
+
+i= 14, j=10, size = 163840...
+    find_sol falhou
+  quadratico: tempo = 0.000033
+    memoria (current): 11223040
+  linear    : tempo = 1972.558205
+    caminhos eq        : nao
+  memoria (Peek): 49621377024
