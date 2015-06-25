@@ -79,3 +79,5 @@ Para implementar a tarefa2b, usou-se a pthread para criar um timeout de
 execuçào da função em questão.
 
 
+
+
