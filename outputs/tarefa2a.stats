@@ -1,189 +1,189 @@
 
 ---------
 i= 1
-tempo quad:   0.055100
-tempo linear: 0.086900
+tempo quad:   0.055
+tempo linear: 0.087
 memoria quad:   690995
 memoria linear: 696320
 
 ---------
 i= 1
-tempo quad:   0.005500
-tempo linear: 0.012000
+tempo quad:   0.005
+tempo linear: 0.012
 memoria quad:   77414
 memoria linear: 77414
 
 ---------
 i= 2
-tempo quad:   0.146900
-tempo linear: 0.289500
+tempo quad:   0.147
+tempo linear: 0.289
 memoria quad:   704102
 memoria linear: 704102
 
 ---------
 i= 2
-tempo quad:   0.016000
-tempo linear: 0.033200
+tempo quad:   0.016
+tempo linear: 0.033
 memoria quad:   78233
 memoria linear: 78233
 
 ---------
 i= 3
-tempo quad:   0.538100
-tempo linear: 1.069500
+tempo quad:   0.538
+tempo linear: 1.069
 memoria quad:   740966
 memoria linear: 740966
 
 ---------
 i= 3
-tempo quad:   0.058700
-tempo linear: 0.120000
+tempo quad:   0.059
+tempo linear: 0.120
 memoria quad:   82329
 memoria linear: 82329
 
 ---------
 i= 4
-tempo quad:   2.091700
-tempo linear: 4.134800
+tempo quad:   2.092
+tempo linear: 4.135
 memoria quad:   888832
 memoria linear: 867942
 
 ---------
 i= 4
-tempo quad:   0.230100
-tempo linear: 0.464900
+tempo quad:   0.230
+tempo linear: 0.465
 memoria quad:   98304
 memoria linear: 98304
 
 ---------
 i= 5
-tempo quad:   8.244300
-tempo linear: 16.261000
+tempo quad:   8.244
+tempo linear: 16.261
 memoria quad:   1462272
 memoria linear: 1379532
 
 ---------
 i= 5
-tempo quad:   0.906400
-tempo linear: 1.805700
+tempo quad:   0.906
+tempo linear: 1.806
 memoria quad:   160153
 memoria linear: 160153
 
 ---------
 i= 6
-tempo quad:   22.846600
-tempo linear: 38.569500
+tempo quad:   22.847
+tempo linear: 38.569
 memoria quad:   3749478
 memoria linear: 3420569
 
 ---------
 i= 6
-tempo quad:   2.193700
-tempo linear: 3.807300
+tempo quad:   2.194
+tempo linear: 3.807
 memoria quad:   407552
 memoria linear: 407552
 
 ---------
 i= 7
-tempo quad:   79.826000
-tempo linear: 136.242800
+tempo quad:   79.826
+tempo linear: 136.243
 memoria quad:   12866355
 memoria linear: 11553177
 
 ---------
 i= 7
-tempo quad:   8.778600
-tempo linear: 15.093400
+tempo quad:   8.779
+tempo linear: 15.093
 memoria quad:   1393459
 memoria linear: 1393459
 
 ---------
 i= 8
-tempo quad:   332.745900
-tempo linear: 542.042300
+tempo quad:   332.746
+tempo linear: 542.042
 memoria quad:   59767603
 memoria linear: 12541132
 
 ---------
 i= 8
-tempo quad:   36.884400
-tempo linear: 59.869000
+tempo quad:   36.884
+tempo linear: 59.869
 memoria quad:   6640844
 memoria linear: 1393459
 
 ---------
 i= 9
-tempo quad:   1325.763000
-tempo linear: 2152.263700
+tempo quad:   1325.763
+tempo linear: 2152.264
 memoria quad:   201362227
 memoria linear: 12541132
 
 ---------
 i= 9
-tempo quad:   147.008100
-tempo linear: 240.935800
+tempo quad:   147.008
+tempo linear: 240.936
 memoria quad:   22373580
 memoria linear: 1393459
 
 ---------
 i= 10
-tempo quad:   5238.301500
-tempo linear: 8588.068600
+tempo quad:   5238.302
+tempo linear: 8588.069
 memoria quad:   767670272
 memoria linear: 12544409
 
 ---------
 i= 10
-tempo quad:   590.074100
-tempo linear: 953.558300
+tempo quad:   590.074
+tempo linear: 953.558
 memoria quad:   85296742
 memoria linear: 1393868
 
 ---------
 i= 11
-tempo quad:   20543.522900
-tempo linear: 34259.458600
+tempo quad:   20543.523
+tempo linear: 34259.459
 memoria quad:   3032742297
 memoria linear: 12544819
 
 ---------
 i= 11
-tempo quad:   2295.452300
-tempo linear: 3801.099900
+tempo quad:   2295.452
+tempo linear: 3801.100
 memoria quad:   336971366
 memoria linear: 1393868
 
 ---------
 i= 12
-tempo quad:   82629.177600
-tempo linear: 137116.378300
+tempo quad:   82629.178
+tempo linear: 137116.378
 memoria quad:   12092737126
 memoria linear: 12548096
 
 ---------
 i= 12
-tempo quad:   9182.379300
-tempo linear: 15255.270600
+tempo quad:   9182.379
+tempo linear: 15255.271
 memoria quad:   1343637504
 memoria linear: 1394278
 
 ---------
 i= 13
-tempo quad:   337825.910000
-tempo linear: 549831.824600
+tempo quad:   337825.910
+tempo linear: 549831.825
 memoria quad:   48332113920
 memoria linear: 12548505
 
 ---------
 i= 13
-tempo quad:   36769.872500
-tempo linear: 61045.534300
+tempo quad:   36769.873
+tempo linear: 61045.534
 memoria quad:   5370234880
 memoria linear: 1394278
 
 ---------
 i= 14
-tempo quad:   1358634.428900
-tempo linear: 2202562.828500
+tempo quad:   1358634.429
+tempo linear: 2202562.828
 memoria quad:   193288439808
 memoria linear: 12548505
