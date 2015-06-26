@@ -18,6 +18,8 @@ double gap = 0.7;
 
 double err = 0.001;
 
+bool tarefa2b_alloc_fail = false;
+
 double
 delta(char A, char B) {
     if (A == B)
@@ -71,6 +73,8 @@ generate (size_t size) {
 }
 
 struct thr_args {
+    bool print_strings;
+    bool print_paths;
     char *name;
     opt_fn funcao;
     char *string1;
@@ -95,10 +99,20 @@ pthread_wrapper(void *data) {
 			      args->gap, args->delta,
 			      &t
 			      );
+
+    if (args->print_paths) {
+	printf("--------------------------------\n");
+	printf("      caminho %s , custo = %f : ", args->name,val);
+	solucao_print(t);
+	printf("--------------------------------\n");
+    }
+
     solucao_destroy(&t);
 
-    if ( isnan(val) )
+    if ( isnan(val) ){
 	printf("%s: find_sol falhou (NAN)\n", args->name);
+	tarefa2b_alloc_fail = true;
+    }
 
     pthread_cond_signal(&done);
     return NULL;
@@ -287,9 +301,19 @@ tarefa2b(int argc, char **argv){
     int timeout = _TIMEOUT_15_MIN;
 
     int opt;
-    
-    while ((opt=getopt(argc,argv,"blqs:m:")) != -1) {
+
+
+    struct thr_args args = {.print_strings = false, .print_paths = false};
+    //    memset(&args, 0 , sizeof(args));
+
+    while ((opt=getopt(argc,argv,"vpblqs:m:")) != -1) {
 	switch (opt) {
+	case 'p':
+	    args.print_paths = true;
+	case 'v':
+	    args.print_strings = true;
+	    break;
+
 	case 's':
 	    timeout = atoi(optarg) ;
 	    break;
@@ -321,11 +345,9 @@ tarefa2b(int argc, char **argv){
     max_wait.tv_sec = timeout;
 
 
-    struct thr_args args;
-    memset(&args, 0 , sizeof(args));
     
 
-    for (int i = 1; run_linear | run_quad ; i++) {
+    for (int i = 1;!tarefa2b_alloc_fail && (run_linear | run_quad) ; i++) {
 
 	printf("\ni = %d, timeout = %d segundos\n", i , timeout);
 	
@@ -339,7 +361,13 @@ tarefa2b(int argc, char **argv){
 	args.string2=string2;
 	args.gap = gap;
 	args.delta = delta;
-
+	
+	if (args.print_strings) {
+	    printf("--------------------------------\n");
+	    printf("      string1       : %s\n", string1);
+	    printf("      string2       : %s\n", string2);
+	    printf("--------------------------------\n");
+	}
 	
 	if (run_linear) {
 	    args.name = "linear";
@@ -352,6 +380,7 @@ tarefa2b(int argc, char **argv){
 	    run_quad = do_or_timeout(&max_wait, &args);
 	
 	}
+
 	free (string1);
 	free (string2);
 	args.string1=NULL;
