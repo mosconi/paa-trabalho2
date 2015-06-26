@@ -301,7 +301,7 @@ solucao_eq(solucao_t *s1,solucao_t *s2) {
   Este método não exibe o úso de memória correte, pois como é um método recursivo, 
   cada invocaçào mostraria o uso, poluindo assim a saída.
 
-  HDGRWD 
+  HBGWRD 
 */
 static double
 find_sol_linear_base(const char *origem, const size_t m,
