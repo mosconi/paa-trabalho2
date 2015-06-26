@@ -51,3 +51,11 @@ while (<>) {
     next;
   }
 }
+printf "\n---------\n".
+	"i= %d" . "\n".
+	"tempo quad:   " . "%0.3f" . "\n".
+	"tempo linear: " . "%0.3f" . "\n".
+	"memoria quad:   " . "%d"  . "\n".
+	"memoria linear: " . "%d"  . "\n",
+	, $i , ($sum_tempo_quad / 10 ) * 1000  , ($sum_tempo_linear / 10) * 1000,
+	$sum_mem_quad / 10 , $sum_mem_linear / 10;
