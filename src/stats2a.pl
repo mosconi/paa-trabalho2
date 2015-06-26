@@ -12,7 +12,7 @@ my $mem_peek=0;
 my $mem_quad_or_linear='q';
 
 while (<>) {
-  if (m/i= (\d*), j=1/) {
+  if (m/i= (\d*), j=1, /) {
     if ($i > 0) {
       printf "\n---------\n".
 	"i= %d" . "\n".
