@@ -1,0 +1,52 @@
+nohup: ignoring input
+
+i = 1, timeout = 900 segundos
+quadratico: calculation ok: 0.000139 seg
+
+i = 2, timeout = 900 segundos
+quadratico: calculation ok: 0.000074 seg
+
+i = 3, timeout = 900 segundos
+quadratico: calculation ok: 0.000069 seg
+
+i = 4, timeout = 900 segundos
+quadratico: calculation ok: 0.000085 seg
+
+i = 5, timeout = 900 segundos
+quadratico: calculation ok: 0.000127 seg
+
+i = 6, timeout = 900 segundos
+quadratico: calculation ok: 0.000453 seg
+
+i = 7, timeout = 900 segundos
+quadratico: calculation ok: 0.001150 seg
+
+i = 8, timeout = 900 segundos
+quadratico: calculation ok: 0.004853 seg
+
+i = 9, timeout = 900 segundos
+quadratico: calculation ok: 0.016673 seg
+
+i = 10, timeout = 900 segundos
+quadratico: calculation ok: 0.063229 seg
+
+i = 11, timeout = 900 segundos
+quadratico: calculation ok: 0.250614 seg
+
+i = 12, timeout = 900 segundos
+quadratico: calculation ok: 0.990538 seg
+
+i = 13, timeout = 900 segundos
+quadratico: calculation ok: 3.967590 seg
+
+i = 14, timeout = 900 segundos
+quadratico: calculation ok: 15.917704 seg
+
+i = 15, timeout = 900 segundos
+quadratico: calculation ok: 63.778742 seg
+
+i = 16, timeout = 900 segundos
+quadratico: calculation ok: 255.099730 seg
+
+i = 17, timeout = 900 segundos
+quadratico: calculation timed out
